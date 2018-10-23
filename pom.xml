@@ -53,11 +53,17 @@
         </dependency>
 
         <!--  springboot 热部署 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-        </dependency>
+        <!--  使用 spring-boot-devtools 会产生强制类型转换的错误 -->
+        <!-- 解决方案1 不使用这个引用 -->
+        <!-- 解决方案2 创建spring-devtools.properties文件，改变类加载器>
+            restart.exclude.companycommonlibs=/mycorp-common-[\w-]+.jar
+            restart.include.projectcommon=/mycorp-myproj-[\w-]+.jar
+        -->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-devtools</artifactId>-->
+            <!--<optional>true</optional>-->
+        <!--</dependency>-->
 
         <!-- log4j -->
         <dependency>

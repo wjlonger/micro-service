@@ -7,7 +7,7 @@
     <title>wujunlong.com</title>
     <meta name="description" content="吴俊龙简历" />
     <!--/* Theme CSS */-->
-    <link rel="stylesheet" href="static/css/wjl_styles.css" th:href="@{'static/css/wjl_styles.css'}" />
+    <link rel="stylesheet" href="/static/css/wjl_styles.css" th:href="@{'/static/css/wjl_styles.css'}" />
 </head>
 <body>
 <header class="header">
@@ -33,7 +33,7 @@
     </div>
     <div class="intro">
         <div class="container text-center">
-            <img class="profile-image img-circle" src="static/img/me.jpg" th:src="@{'static/img/me.jpg'}" alt="吴俊龙">
+            <img class="profile-image img-circle" src="/static/img/me.jpg" th:src="@{'/static/img/me.jpg'}" alt="吴俊龙">
             <h1 class="name">吴俊龙</h1>
             <div class="title">Java & .Net Developer</div>
             <div class="profile">
@@ -277,7 +277,7 @@
     <section id="contact-section" class="contact-section section">
         <h2 class="section-title">我能为你做什么</h2>
         <div class="intro">
-            <img class="profile-image img-circle" src="static/img/me.jpg" th:src="@{'static/img/me.jpg'}" alt="吴俊龙">
+            <img class="profile-image img-circle" src="/static/img/me.jpg" th:src="@{'/static/img/me.jpg'}" alt="吴俊龙">
             <div class="dialog">
                 <p>本人专注于后端开发，掌握目前互联网应用主流技术，对高并发,高吞吐量的应用开发有一定经验。</p>
                 <p><strong>我能为您提供如下的技术服务：</strong></p>
@@ -319,9 +319,9 @@
 </div>
 <footer>
     <div th:include="home/footer::footer"></div>
-    <script type="text/javascript" src="static/js/back-to-top.js" th:src="@{'static/js/back-to-top.js'}"></script>
-    <script type="text/javascript" src="static/js/main.js" th:src="@{'static/js/main.js'}"></script>
-    <script type="text/javascript" src="static/js/style-switcher.js" th:src="@{'static/js/style-switcher.js'}"></script>
+    <script type="text/javascript" src="/static/js/back-to-top.js" th:src="@{'/static/js/back-to-top.js'}"></script>
+    <script type="text/javascript" src="/static/js/main.js" th:src="@{'/static/js/main.js'}"></script>
+    <script type="text/javascript" src="/static/js/style-switcher.js" th:src="@{'/static/js/style-switcher.js'}"></script>
 </footer>
 </body>
 </html>

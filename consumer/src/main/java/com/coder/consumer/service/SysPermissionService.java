@@ -13,5 +13,5 @@ public interface SysPermissionService extends com.coder.base.service.SysPermissi
 
     @Override
     @RequestLine("POST /selectAll")
-    List<SysPermission> selectAll(@RequestBody SysPermission sysPermission);
+    List<SysPermission> selectAll(@RequestBody(required = false) SysPermission sysPermission);
 }

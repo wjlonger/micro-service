@@ -14,7 +14,7 @@ public interface SysRoleService extends com.coder.base.service.SysRoleService {
 
     @Override
     @RequestLine("POST /selectAll")
-    List<SysRole> selectAll(@RequestBody SysRole sysRole);
+    List<SysRole> selectAll(@RequestBody(required = false) SysRole sysRole);
 
     @Override
     @RequestLine("GET /selectByPrimaryKey/{id}")

@@ -1,16 +1,11 @@
 package com.coder.provider.controller;
 
 import com.coder.base.service.SysUserService;
-import com.coder.base.model.SysMenu;
-import com.coder.base.model.SysRole;
 import com.coder.base.model.SysUser;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @RestController

@@ -18,7 +18,7 @@ public class SysRoleController {
     private SysRoleService sysRoleService;
 
     @PostMapping("/selectAll")
-    public List<SysRole> selectAll(@RequestBody SysRole sysRole) {
+    public List<SysRole> selectAll(@RequestBody(required = false) SysRole sysRole) {
         return sysRoleService.selectAll(sysRole);
     }
 

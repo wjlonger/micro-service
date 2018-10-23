@@ -22,7 +22,7 @@ public class SysPermissionController {
     private SysPermissionService sysPermissionService;
 
     @PostMapping("/selectAll")
-    public List<SysPermission> selectAll(@RequestBody SysPermission sysPermission) {
+    public List<SysPermission> selectAll(@RequestBody(required = false) SysPermission sysPermission) {
         return sysPermissionService.selectAll(sysPermission);
     }
 

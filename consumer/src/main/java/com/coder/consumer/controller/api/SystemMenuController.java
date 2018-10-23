@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/menu")
 public class SystemMenuController {
+
     @Autowired
     private SysMenuService sysMenuService;
 

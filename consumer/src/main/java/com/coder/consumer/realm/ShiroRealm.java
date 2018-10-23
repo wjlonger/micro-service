@@ -26,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * 验证通过将返回一个封装了用户信息的AuthenticationInfo实例。
  * 验证失败则抛出AuthenticationException异常信息。
  * 而在我们的应用程序中要做的就是自定义一个Realm类，继承AuthorizingRealm抽象类，重载doGetAuthenticationInfo()，重写获取用户信息的方法。
+ * @author wjl
  */
 
 public class ShiroRealm extends AuthorizingRealm {
@@ -48,13 +49,16 @@ public class ShiroRealm extends AuthorizingRealm {
         sysUser.setName(token.getUsername());
         SysUser thisUser = sysUserService.selectByProperty(sysUser);
         if(thisUser == null) {
-            throw new UnknownAccountException();//没找到帐号
+            //没找到帐号
+            throw new UnknownAccountException();
         }
         return new SimpleAuthenticationInfo(
-                thisUser, // 用户实体 这里放实体，下面的方法可以直接取出实体，从而得到角色和权限，如果这里添加的是
-                thisUser.getPassword(),// 密码
-                getName()); // realm name
-
+                // 用户实体
+                thisUser,
+                // 密码
+                thisUser.getPassword(),
+                // realm name
+                getName());
     }
 
     /**

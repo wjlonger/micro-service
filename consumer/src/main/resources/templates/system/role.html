@@ -176,12 +176,6 @@
                                 axios.post('/api/role/menu/',{
                                     roleid:vm.roles[index].rid,
                                     menuid:$(e.target).val()
-                                },{
-                                    transformRequest:[
-                                        function(data){
-                                            return vm.transformRequest(data);
-                                        }
-                                    ]
                                 }).then(response => {
                                     Object.assign(vm.roles[index],response.data.role)
                                 }).catch(response => {
@@ -192,12 +186,6 @@
                                 axios.post('/api/role/permission/',{
                                     rid:vm.roles[index].rid,
                                     pid:$(e.target).val()
-                                },{
-                                    transformRequest:[
-                                        function(data){
-                                            return vm.transformRequest(data);
-                                        }
-                                    ]
                                 }).then(response => {
                                     Object.assign(vm.roles[index],response.data.role)
                                 }).catch(response => {
@@ -221,8 +209,6 @@
                             });
                         },
                         save:function(){
-
-                            console.log(111)
                             console.log(JSON.stringify($("#role-menus").val()));
                             //return;
                             var params = new URLSearchParams();

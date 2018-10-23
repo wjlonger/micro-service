@@ -32,7 +32,7 @@ public class SystemRoleController {
     private RolePermissionService rolePermissionService;
 
     @PostMapping("/menu")
-    private String saveMenu(RoleMenu roleMenu){
+    private String saveMenu(@RequestBody RoleMenu roleMenu){
         int i = roleMenuService.insert(roleMenu);
         JSONObject json = new JSONObject();
         JsonUtils.addMessage(i,json);

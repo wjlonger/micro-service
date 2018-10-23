@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+/center/target/
+/base/target/
+/config-server/target/
+/consumer/target/
+/provider/target/
+/route/target/

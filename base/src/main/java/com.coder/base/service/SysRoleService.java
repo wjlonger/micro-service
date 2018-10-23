@@ -1,13 +1,16 @@
 package com.coder.base.service;
 
-import com.coder.base.model.SysMenu;
-import com.coder.base.model.SysPermission;
 import com.coder.base.model.SysRole;
-import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
 public interface SysRoleService {
+
+    SysRole selectByPrimaryKey(Integer rid);
+
+    List<SysRole> selectAll(SysRole sysRole);
+
+    int save(SysRole sysRole);
 
 //    int deleteByPrimaryKey(Integer rid);
 //
@@ -23,12 +26,6 @@ public interface SysRoleService {
 //
 //    int updateByPrimaryKey(SysRole sysRole);
 //
-//    int save(SysRole sysRole);
-//
-//    SysRole selectByPrimaryKey(Integer rid);
-
-    List<SysRole> selectAll(SysRole sysRole);
-
 //    PageInfo<SysRole> selectPage(int pageIndex, int pageSize, SysRole sysRole);
 //
 //    SysRole selectByProperty(SysRole sysRole);

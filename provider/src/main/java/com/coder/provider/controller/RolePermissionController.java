@@ -6,8 +6,7 @@ import com.coder.base.model.RolePermission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @RestController
@@ -17,15 +16,18 @@ public class RolePermissionController {
     @Autowired
     private RolePermissionService rolePermissionService;
 
-    public int deleteByPrimaryKey(RolePermission rolePermission) {
+    @DeleteMapping("/deleteByPrimaryKey")
+    public int deleteByPrimaryKey(@RequestBody RolePermission rolePermission) {
         return rolePermissionService.deleteByPrimaryKey(rolePermission);
     }
 
-    public int deleteByProperty(RolePermission rolePermission) {
+    @DeleteMapping("/deleteByProperty")
+    public int deleteByProperty(@RequestBody RolePermission rolePermission) {
         return rolePermissionService.deleteByProperty(rolePermission);
     }
 
-    public int insert(RolePermission rolePermission) {
+    @PostMapping("/insert")
+    public int insert(@RequestBody RolePermission rolePermission) {
         return rolePermissionService.insert(rolePermission);
     }
 }

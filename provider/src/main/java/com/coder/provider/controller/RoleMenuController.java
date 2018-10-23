@@ -6,8 +6,7 @@ import com.coder.base.model.RoleMenu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @RestController
@@ -17,15 +16,18 @@ public class RoleMenuController {
     @Autowired
     private RoleMenuService roleMenuService;
 
-    public int deleteByPrimaryKey(RoleMenu roleMenu) {
+    @DeleteMapping("/deleteByPrimaryKey")
+    public int deleteByPrimaryKey(@RequestBody RoleMenu roleMenu) {
         return roleMenuService.deleteByPrimaryKey(roleMenu);
     }
 
-    public int deleteByProperty(RoleMenu roleMenu) {
+    @DeleteMapping("/deleteByProperty")
+    public int deleteByProperty(@RequestBody RoleMenu roleMenu) {
         return roleMenuService.deleteByProperty(roleMenu);
     }
 
-    public int insert(RoleMenu roleMenu) {
+    @PostMapping("/insert")
+    public int insert(@RequestBody RoleMenu roleMenu) {
         return roleMenuService.insert(roleMenu);
     }
 }

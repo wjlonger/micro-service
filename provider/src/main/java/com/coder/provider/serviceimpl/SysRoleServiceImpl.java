@@ -28,6 +28,23 @@ public class SysRoleServiceImpl implements SysRoleService {
         return roles;
     }
 
+    @Override
+    public SysRole selectByPrimaryKey(Integer rid) {
+        return sysRoleMapper.selectByPrimaryKey(rid);
+    }
+
+    @Override
+    public int save(SysRole sysRole) {
+        if(sysRole == null){
+            return 0;
+        }
+        SysRole temp = sysRoleMapper.selectByPrimaryKey(sysRole.getRid());
+        if(temp == null){
+            return sysRoleMapper.insert(sysRole);
+        }
+        return sysRoleMapper.updateByPrimaryKeySelective(sysRole);
+    }
+
 //    @Override
 //    public int deleteByPrimaryKey(Integer rid) {
 //        return sysRoleMapper.deleteByPrimaryKey(rid);
@@ -66,22 +83,8 @@ public class SysRoleServiceImpl implements SysRoleService {
 //        return sysRoleMapper.updateByPrimaryKey(sysRole);
 //    }
 //
-//    @Override
-//    public int save(SysRole sysRole) {
-//        if(sysRole == null){
-//            return 0;
-//        }
-//        SysRole temp = sysRoleMapper.selectByPrimaryKey(sysRole.getRid());
-//        if(temp == null){
-//            return sysRoleMapper.insert(sysRole);
-//        }
-//        return sysRoleMapper.updateByPrimaryKeySelective(sysRole);
-//    }
-//
-//    @Override
-//    public SysRole selectByPrimaryKey(Integer rid) {
-//        return sysRoleMapper.selectByPrimaryKey(rid);
-//    }
+
+
 
 //    @Override
 //    public PageInfo<SysRole> selectPage(int pageIndex, int pageSize, SysRole sysRole) {

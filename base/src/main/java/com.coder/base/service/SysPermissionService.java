@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface SysPermissionService {
 
+    List<SysPermission> selectAll(SysPermission sysPermission);
+
 //    SysPermission selectByPrimaryKey(Integer id);
 //
 //    PageInfo<SysPermission> selectPage(int pageIndex, int pageSize, SysPermission sysPermission);
-
-    List<SysPermission> selectAll(SysPermission sysPermission);
 
 //    SysPermission selectByProperty(SysPermission sysPermission);
 //

@@ -9,6 +9,12 @@ public interface SysMenuService {
 
     int deleteByPrimaryKey(Integer id);
 
+    SysMenu selectByPrimaryKey(Integer id);
+
+    List<SysMenu> selectAll();
+
+    int save(SysMenu sysMenu);
+
 //    int deleteByProperty(SysMenu sysMenu);
 //
 //    int insert(SysMenu sysMenu);
@@ -21,13 +27,7 @@ public interface SysMenuService {
 //
 //    int updateByPrimaryKey(SysMenu sysMenu);
 
-    SysMenu selectByPrimaryKey(Integer id);
-
-    List<SysMenu> selectAll();
-
 //    PageInfo<SysMenu> selectPage(int pageIndex, int pageSize);
-
-    int save(SysMenu sysMenu);
 
 //    int findCount(SysMenu sysMenu);
 }

@@ -1,17 +1,11 @@
 package com.coder.provider.controller;
 
 import com.coder.base.service.SysRoleService;
-import com.coder.base.model.SysMenu;
-import com.coder.base.model.SysPermission;
 import com.coder.base.model.SysRole;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +20,16 @@ public class SysRoleController {
     @PostMapping("/selectAll")
     public List<SysRole> selectAll(@RequestBody SysRole sysRole) {
         return sysRoleService.selectAll(sysRole);
+    }
+
+    @GetMapping("/selectByPrimaryKey/{id}")
+    public SysRole selectByPrimaryKey(@PathVariable("id") Integer rid) {
+        return sysRoleService.selectByPrimaryKey(rid);
+    }
+
+    @PostMapping("/save")
+    public int save(@RequestBody SysRole sysRole) {
+        return sysRoleService.save(sysRole);
     }
 
 //    public int deleteByPrimaryKey(Integer rid) {
@@ -54,14 +58,6 @@ public class SysRoleController {
 //
 //    public int updateByPrimaryKey(SysRole sysRole) {
 //        return sysRoleService.updateByPrimaryKey(sysRole);
-//    }
-//
-//    public int save(SysRole sysRole) {
-//        return sysRoleService.save(sysRole);
-//    }
-//
-//    public SysRole selectByPrimaryKey(Integer rid) {
-//        return sysRoleService.selectByPrimaryKey(rid);
 //    }
 //
 //    public PageInfo<SysRole> selectPage(int pageIndex, int pageSize, SysRole sysRole) {

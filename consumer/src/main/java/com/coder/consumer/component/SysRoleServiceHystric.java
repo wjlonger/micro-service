@@ -10,6 +10,16 @@ import java.util.List;
 public class SysRoleServiceHystric implements SysRoleService {
 
     @Override
+    public SysRole selectByPrimaryKey(Integer rid) {
+        return null;
+    }
+
+    @Override
+    public int save(SysRole sysRole) {
+        return 0;
+    }
+
+    @Override
     public List<SysRole> selectAll(SysRole sysRole) {
         return null;
     }

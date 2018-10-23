@@ -9,13 +9,13 @@ import java.util.List;
 
 public interface SysUserService {
 
+    SysUser selectByProperty(SysUser sysUser);
+
 //    SysUser selectByPrimaryKey(Integer id);
 //
 //    List<SysUser> selectAll(SysUser sysUser);
 //
 //    PageInfo<SysUser> selectPage(int pageIndex, int pageSize, SysUser sysUser);
-
-    SysUser selectByProperty(SysUser sysUser);
 
 //    int deleteByPrimaryKey(Integer id);
 //

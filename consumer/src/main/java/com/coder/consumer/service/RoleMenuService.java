@@ -15,7 +15,7 @@ public interface RoleMenuService extends com.coder.base.service.RoleMenuService 
 
     @Override
     @RequestLine("DELETE /deleteByProperty")
-    int deleteByProperty(@RequestBody() RoleMenu roleMenu);
+    int deleteByProperty(@RequestBody RoleMenu roleMenu);
 
     @Override
     @RequestLine("POST /insert")

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="zh-CN" >
+<head>
+    <title>登录</title>
+    <link href="static/css/default.css" th:href="@{'static/css/default.css'}" rel="stylesheet" />
+    <link href="static/css/styles.css" th:href="@{'static/css/styles.css'}" rel="stylesheet" />
+    <link href="static/css/demo.css" th:href="@{'static/css/demo.css'}" rel="stylesheet" />
+    <link href="static/css/loaders.css" th:href="@{'static/css/loaders.css'}" rel="stylesheet" />
+    <link href="static/css/layui.css" th:href="@{'static/css/layui.css'}" rel="stylesheet" />
+</head>
+<body>
+    <form action="/login" method="post">
+        <div class='login'>
+            <div class='login_title'>
+                <span>管理员登录</span>
+            </div>
+            <div class='login_fields'>
+                <div class='login_fields__user'>
+                    <div class='icon'>
+                        <img alt="" src='static/img/user_icon_copy.png' th:src="@{'static/img/user_icon_copy.png'}">
+                    </div>
+                    <input name="name" placeholder='用户名' maxlength="16" type='text' autocomplete="off" value="kbcxy"/>
+                    <div class='validation'>
+                        <img alt="" src='static/img/tick.png' th:src="@{'static/img/tick.png'}">
+                    </div>
+                </div>
+                <div class='login_fields__password'>
+                    <div class='icon'>
+                        <img alt="" src='static/img/lock_icon_copy.png' th:src="@{'static/img/lock_icon_copy.png'}">
+                    </div>
+                    <input name="password" placeholder='密码' maxlength="16" type='text' autocomplete="off">
+                    <div class='validation'>
+                        <img alt="" src='static/img/tick.png' th:src="@{'static/img/tick.png'}">
+                    </div>
+                </div>
+                <div class='login_fields__password'>
+                    <div class='icon'>
+                        <img alt="" src='static/img/key.png' th:src="@{'static/img/key.png'}">
+                    </div>
+                    <input type="text" th:name="code" name="code" th:placeholder="验证码" placeholder='验证码' th:maxlength="4" maxlength="4" autocomplete="off" th:autocomplete="off" >
+                    <div class='validation' style="opacity: 1; right: -5px;top: -3px;">
+                        <canvas class="J_codeimg" id="myCanvas" onclick="Code();">对不起，您的浏览器不支持canvas，请下载最新版浏览器!</canvas>
+                    </div>
+                </div>
+                <div class='login_fields__submit'>
+                    <button type='submit' value='登录'>登录</button>
+                </div>
+            </div>
+            <div class='success'>
+            </div>
+            <div class='disclaimer'>
+                <p>欢迎登陆后台管理系统</p>
+            </div>
+        </div>
+    </form>
+    <div class='authent'>
+        <div class="loader" style="height: 44px;width: 44px;margin-left: 28px;">
+            <div class="loader-inner ball-clip-rotate-multiple">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <p>认证中...</p>
+    </div>
+    <div class="OverWindows"></div>
+    <footer>
+        <div th:replace="home/footer::footer"></div>
+        <script type="text/javascript" src="static/js/jquery-ui.min.js" th:src="@{'static/js/jquery-ui.min.js'}"></script>
+        <script type="text/javascript" src="static/js/layui/layui.js" th:src="@{'static/js/layui/layui.js'}"></script>
+        <script type="text/javascript" src="static/js/stopExecutionOnTimeout.js" th:src="@{'static/js/stopExecutionOnTimeout.js'}"></script>
+        <script type="text/javascript" src="static/js/Particleground.js" th:src="@{'static/js/Particleground.js'}"></script>
+        <script type="text/javascript" src="static/js/Treatment.js" th:src="@{'static/js/Treatment.js'}"></script>
+        <!--<script type="text/javascript" src="/js/jquery.mockjax.js" th:src="@{'https://cdn.bootcss.com/jquery-mockjax/1.6.2/jquery.mockjax.min.js'}"></script>-->
+        <script type="text/javascript" src="static/js/login.js" th:src="@{'static/js/login.js'}"></script>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coder.provider.mapper.RoleMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.coder.base.model.RoleMenu" >
+    <id column="roleid" property="roleid" jdbcType="INTEGER" />
+    <id column="menuid" property="menuid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    roleid, menuid
+  </sql>
+  <sql id="WhereCase">
+    <where>
+      <if test="roleid != null" >
+        and roleid = #{roleid,jdbcType=INTEGER}
+      </if>
+      <if test="menuid != null" >
+        and menuid = #{menuid,jdbcType=INTEGER}
+      </if>
+      <if test="where != null and where != ''" >
+        and ${where}
+      </if>
+    </where>
+  </sql>
+  <delete id="deleteByPrimaryKey" parameterType="com.coder.base.model.RoleMenu" >
+    delete from role_menu
+    where roleid = #{roleid,jdbcType=INTEGER} and menuid = #{menuid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByProperty" parameterType="com.coder.base.model.RoleMenu" >
+    delete from role_menu
+    <include refid="WhereCase"></include>
+  </delete>
+  <insert id="insert" parameterType="com.coder.base.model.RoleMenu" >
+    insert into role_menu (roleid, menuid)
+    values (#{roleid,jdbcType=INTEGER}, #{menuid,jdbcType=INTEGER})
+  </insert>
+</mapper>

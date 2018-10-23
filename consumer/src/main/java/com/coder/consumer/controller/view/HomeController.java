@@ -1,0 +1,118 @@
+package com.coder.consumer.controller.view;
+
+import com.coder.consumer.service.TestService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.*;
+import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+
+import static com.coder.util.MD5Encrypt.MD5Encode;
+
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
+@Controller
+@RequestMapping
+public class HomeController {
+
+    @Value("${version}")
+    private String version;
+
+    @Autowired
+    private TestService testService;
+
+    @GetMapping("/version")
+    @ResponseBody
+    public String path(){
+        return version;
+    }
+
+    @GetMapping("/test")
+    @ResponseBody
+    public String test(){
+        return testService.testFromClient();
+    }
+
+    @GetMapping
+    public String index(){
+        return "home/index";
+    }
+
+    @GetMapping("/login")
+    public String login(){
+        //获取当前用户对象
+        Subject subject = SecurityUtils.getSubject();
+        if(subject.isAuthenticated()){
+            return "redirect:/main";
+        }
+        return "home/login";
+    }
+
+    @PostMapping("/login")
+    public String login(String name,String password){
+        //获取当前用户对象
+        Subject subject = SecurityUtils.getSubject();
+        if (!subject.isAuthenticated()) {
+            // 把用户名和密码封装为UsernamePasswordToken 对象
+            UsernamePasswordToken token = new UsernamePasswordToken(name, MD5Encode(MD5Encode(password)));
+            token.setRememberMe(true);
+            try {
+                // 执行登陆
+                subject.login(token);
+                return "redirect:/main";
+            } catch ( UnknownAccountException uae ) {
+                //username wasn't in the system, show them an error message?
+                System.out.println("账号不存在");
+            } catch ( IncorrectCredentialsException ice ) {
+                //password didn't match, try again?
+                System.out.println("密码错误");
+            } catch (LockedAccountException lae ) {
+                //account for that username is locked - can't login.  Show them a message?
+                System.out.println("账号被锁");
+            } catch (AuthenticationException ae) {
+                System.out.println("登录失败--->" + ae.getMessage());
+            }
+            return "home/login";
+        }
+        return "redirect:/main";
+    }
+
+    @GetMapping("/main")
+    public String main(Model model){
+        return "home/main";
+    }
+
+    @GetMapping("/getsession")
+    @ResponseBody
+    public String getSessionId(HttpServletRequest req){
+        Object o = req.getSession().getAttribute("springboot");
+        if(o == null){
+            o = "端口：" + req.getLocalPort() + "生成SessionId:" + req.getSession().getId();
+            req.getSession().setAttribute("springboot", o);
+        }
+        return o + "<br/>当前端口=" + req.getLocalPort() +  " sessionId=" + req.getSession().getId() +"<br/>";
+    }
+
+
+    @GetMapping("/lovedongqing")
+    public String loveDongQing(){
+        return "dongqing";
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+}

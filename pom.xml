@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.coder</groupId>
+    <artifactId>root</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>center</module>
+        <module>consumer</module>
+        <module>provider</module>
+        <module>route</module>
+        <module>config-server</module>
+        <module>base</module>
+    </modules>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.5.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <spring-cloud.version>Finchley.SR1</spring-cloud.version>
+    </properties>
+
+    <dependencies>
+
+
+        <!-- 支持全栈式Web开发，包括Tomcat和spring-webmvc -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- 支持常规的测试依赖，包括JUnit、Hamcrest、Mockito以及spring-test模块。 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--  springboot 热部署 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- log4j -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j</artifactId>
+            <version>1.3.8.RELEASE</version>
+        </dependency>
+
+        <!-- 增加了面向产品上线相关的功能，比如测量和监控。 -->
+        <!-- 因为要使用RabbitMQ，所以加上这个依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+
+        <!-- 这是Spring Boot的核心启动器，包含了自动配置、日志和YAML。 -->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter</artifactId>-->
+        <!--</dependency>-->
+
+        <!-- 通过spring-rabbit来支持AMQP协议（Advanced Message Queuing Protocol. 。 -->
+        <!--<dependency>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-starter-amqp</artifactId>-->
+        <!--</dependency>-->
+
+        <!-- 支持javax.mail模块。 -->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-mail</artifactId>-->
+        <!--</dependency>-->
+
+        <!-- redis -->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-data-redis</artifactId>-->
+        <!--</dependency>-->
+
+        <!-- redis 组件 有上面的 这两个基本一致 -->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-redis</artifactId>-->
+            <!--<version>1.4.6.RELEASE</version>-->
+        <!--</dependency>-->
+
+        <!-- thymeleaf 模板 -->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-thymeleaf</artifactId>-->
+        <!--</dependency>-->
+
+        <!-- AOP -->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-aop</artifactId>-->
+        <!--</dependency>-->
+
+        <!-- 支持WebSocket开发 -->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-websocket</artifactId>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.session</groupId>-->
+            <!--<artifactId>spring-session-data-redis</artifactId>-->
+        <!--</dependency>-->
+
+        <!-- log4j2 -->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-log4j2</artifactId>-->
+        <!--</dependency>-->
+
+        <!-- kafka -->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.cloud</groupId>-->
+            <!--<artifactId>spring-cloud-stream-binder-kafka</artifactId>-->
+        <!--</dependency>-->
+
+        <!-- swagger -->
+        <!--<dependency>-->
+            <!--<groupId>io.springfox</groupId>-->
+            <!--<artifactId>springfox-swagger2</artifactId>-->
+            <!--<version>2.8.0</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>io.springfox</groupId>-->
+            <!--<artifactId>springfox-swagger-ui</artifactId>-->
+            <!--<version>2.8.0</version>-->
+        <!--</dependency>-->
+
+        <!-- 如果想用 thymeleaf layout 布局页面，需要引入如下引用 -->
+        <!--<dependency>-->
+            <!--<groupId>nz.net.ultraq.thymeleaf</groupId>-->
+            <!--<artifactId>thymeleaf-layout-dialect</artifactId>-->
+            <!--<version>2.2.2</version>-->
+        <!--</dependency>-->
+
+        <!-- 如果再properties文件中配置Legacy HTML5，则需要如下引用，否则不用-->
+        <!--<dependency>-->
+            <!--<groupId>net.sourceforge.nekohtml</groupId>-->
+            <!--<artifactId>nekohtml</artifactId>-->
+            <!--<version>1.9.22</version>&lt;!&ndash; 版本自己调整，也可不动 &ndash;&gt;-->
+        <!--</dependency>-->
+
+        <!-- realm -->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.shiro</groupId>-->
+            <!--<artifactId>shiro-spring</artifactId>-->
+            <!--<version>1.4.0</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.apache.shiro</groupId>-->
+            <!--<artifactId>shiro-ehcache</artifactId>-->
+            <!--<version>1.4.0</version>-->
+        <!--</dependency>-->
+
+        <!-- realm+redis缓存插件 -->
+        <!--<dependency>-->
+            <!--<groupId>org.crazycake</groupId>-->
+            <!--<artifactId>shiro-redis</artifactId>-->
+            <!--<version>2.4.2.1-RELEASE</version>-->
+        <!--</dependency>-->
+
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+
+            <!-- mybatis generator 自动生成代码插件 -->
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.2</version>
+                <configuration>
+                    <configurationFile>${basedir}/src/main/resources/generator/generatorConfig.xml</configurationFile>
+                    <overwrite>true</overwrite>
+                    <verbose>true</verbose>
+                </configuration>
+            </plugin>
+
+            <!-- springboot package 打开下面注释 如果install则把插件注释-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                    <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
+                </configuration>
+            </plugin>
+
+            <!-- docker -->
+            <!--<plugin>-->
+                <!--<groupId>com.spotify</groupId>-->
+                <!--<artifactId>docker-maven-plugin</artifactId>-->
+                <!--<version>0.4.3</version>-->
+                <!--<configuration>-->
+                    <!--<imageName>docker.SprongBoot/${project.artifactId}</imageName>-->
+                    <!--<dockerDirectory>src/main/docker</dockerDirectory>-->
+                    <!--<resources>-->
+                        <!--<resource>-->
+                            <!--<targetPath>/</targetPath>-->
+                            <!--<directory>${project.build.directory}</directory>-->
+                            <!--<include>${project.build.finalName}.jar</include>-->
+                        <!--</resource>-->
+                    <!--</resources>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+
+        </plugins>
+    </build>
+
+</project>

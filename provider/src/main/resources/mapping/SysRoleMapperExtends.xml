@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coder.provider.mapper.SysRoleMapper" >
+
+  <resultMap id="BaseResultMap" type="com.coder.base.model.SysRole" >
+    <id column="rid" property="rid" jdbcType="INTEGER" />
+    <result column="rname" property="rname" jdbcType="VARCHAR" />
+    <association column="rid" select="selectMenusByPrimaryKey" property="sysMenuList" />
+    <association column="rid" select="selectPermissionByPrimaryKey" property="sysPermissionList" />
+    <association column="rid" select="selectOtherMenusByPrimaryKey" property="otherMenus" />
+    <association column="rid" select="selectOtherPermissionByPrimaryKey" property="otherPermissions" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List" >
+    rid, rname
+  </sql>
+  <sql id="Sys_Permission_Base_Column_List" >
+    sys_permission.id,sys_permission.name
+  </sql>
+  <sql id="Sys_Menu_Base_Column_List" >
+    sys_menu.id, sys_menu.name, sys_menu.icon, sys_menu.pid, sys_menu.url, sys_menu.`order`
+  </sql>
+  <sql id="WhereCase">
+    <where>
+      <if test="rid != null" >
+        and rid = #{rid,jdbcType=INTEGER}
+      </if>
+      <if test="rname != null" >
+        and rname = #{rname,jdbcType=VARCHAR}
+      </if>
+      <if test="where != null and where != ''">
+        and ${where}
+      </if>
+    </where>
+  </sql>
+  <sql id="OrderBy">
+    <if test="orderBy != null and orderBy != ''">
+      order by sys_role.${orderBy} ${orderSequnce}
+    </if>
+  </sql>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from
+      sys_role
+    where
+      rid = #{rid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByProperty" parameterType="com.coder.base.model.SysRole" >
+    delete from
+      sys_role
+    <include refid="WhereCase"></include>
+  </delete>
+
+  <!-- 插入数据并赋值到领域模型 方法一 -->
+  <!--<insert id="insert" parameterType="com.coder.base.model.SysRole" >-->
+    <!--<selectKey resultType ="java.lang.Integer" keyProperty="rid" order="AFTER">-->
+      <!--select LAST_INSERT_ID() as rid-->
+    <!--</selectKey >-->
+    <!--insert into-->
+      <!--sys_role (rid, rname)-->
+    <!--values-->
+      <!--(#{rid,jdbcType=INTEGER}, #{rname,jdbcType=VARCHAR})-->
+  <!--</insert>-->
+  <!-- 插入数据并赋值到领域模型 方法二 -->
+  <insert id="insert" parameterType="com.coder.base.model.SysRole" useGeneratedKeys="true" keyProperty="rid" >
+    insert into
+      sys_role (rid, rname)
+    values
+      (#{rid,jdbcType=INTEGER}, #{rname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.coder.base.model.SysRole" >
+    insert into
+      sys_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        rid,
+      </if>
+      <if test="rname != null" >
+        rname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="rname != null" >
+        #{rname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertToBatch" parameterType="java.util.List">
+    <selectKey resultType ="java.lang.Integer" keyProperty="id" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey >
+    insert into
+      sys_role (rid, rname)
+    values
+    <foreach collection="list" item="item" index="index" separator="," >
+      <if test="item != null">
+        (#{rid,jdbcType=INTEGER}, #{rname,jdbcType=VARCHAR})
+      </if>
+    </foreach>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.coder.base.model.SysRole" >
+    update
+      sys_role
+    <set>
+      <if test="rname != null" >
+        rname = #{rname,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where
+      rid = #{rid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.coder.base.model.SysRole" >
+    update
+      sys_role
+    set
+      rname = #{rname,jdbcType=VARCHAR}
+    where
+      rid = #{rid,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+      <include refid="Base_Column_List" />
+    from
+      sys_role
+    where
+      rid = #{rid,jdbcType=INTEGER}
+  </select>
+  <select id="selectByVo" resultMap="BaseResultMap" parameterType="com.coder.base.model.SysRole">
+    select
+      <include refid="Base_Column_List"></include>
+    from
+      sys_role
+    <include refid="WhereCase"></include>
+    <include refid="OrderBy"></include>
+  </select>
+  <select id="selectByProperty" resultMap="BaseResultMap" parameterType="com.coder.base.model.SysRole">
+    select
+      <include refid="Base_Column_List"></include>
+    from
+      sys_role
+    <include refid="WhereCase"></include>
+  </select>
+  <select id="findCount" resultType="java.lang.Integer" parameterType="com.coder.base.model.SysRole">
+    select
+      count(rid)
+    from
+      sys_role
+    <include refid="WhereCase"></include>
+  </select>
+
+  <!-- 级联查询 s -->
+  <select id="selectPermissionByPrimaryKey" resultMap="com.coder.provider.mapper.SysPermissionMapper.BaseResultMap" parameterType="java.lang.Integer">
+    select
+      <include refid="Sys_Permission_Base_Column_List" />
+    from
+      sys_permission
+    inner join
+      role_permission
+    on
+      sys_permission.id = role_permission.pid
+    and
+      role_permission.rid = #{rid,jdbcType=INTEGER}
+  </select>
+  <select id="selectMenusByPrimaryKey" resultMap="com.coder.provider.mapper.SysMenuMapper.BaseResultMap" parameterType="java.lang.Integer">
+    select
+      <include refid="Sys_Menu_Base_Column_List" />
+    from
+      sys_menu
+    inner join
+      role_menu
+    on
+      sys_menu.id = role_menu.menuid
+    and
+      role_menu.roleid = #{rid,jdbcType=INTEGER}
+    order by
+      `order` asc
+  </select>
+  <select id="selectOtherPermissionByPrimaryKey" resultMap="com.coder.provider.mapper.SysPermissionMapper.BaseResultMap" parameterType="java.lang.Integer">
+    SELECT <include refid="Sys_Permission_Base_Column_List" />
+    FROM sys_permission
+    LEFT JOIN role_permission ON sys_permission.id = role_permission.pid
+    AND role_permission.rid = #{rid,jdbcType=INTEGER}
+    WHERE role_permission.pid IS NULL
+    ORDER BY sys_permission.id ASC
+  </select>
+  <select id="selectOtherMenusByPrimaryKey" resultMap="com.coder.provider.mapper.SysMenuMapper.BaseResultMap" parameterType="java.lang.Integer">
+    SELECT <include refid="Sys_Menu_Base_Column_List" />
+    FROM sys_menu
+    LEFT JOIN role_menu ON sys_menu.id = role_menu.menuid
+    AND role_menu.roleid = #{rid,jdbcType=INTEGER}
+    WHERE sys_menu.pid = 0
+    AND role_menu.menuid IS NULL
+    ORDER BY `order` ASC
+  </select>
+  <!-- 级联查询 e -->
+
+</mapper>

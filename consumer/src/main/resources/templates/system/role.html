@@ -1,0 +1,285 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://www.thymeleaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+       layout:decorator="layout/layout"
+       lang="zh-CN">
+    <head></head>
+    <body>
+        <div id="app" layout:fragment="content">
+            <div class="row">
+                <div class="col-12">
+                    <button class="btn btn-common" data-toggle="modal" data-target="#role-modal" >
+                        <i class="fa fa-clone"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="box col-xs-12 col-sm-12 col-md-12 col-lg-6" v-for="(role,outterindex) in roles" :key="role.rid">
+                    <div class="card">
+                        <div class="card-header border-bottom">
+                            <h4 class="card-title">{{role.rname}}</h4>
+                            <a class="btn btn-app pull-right" th:href="'#'">
+                                <button class="btn btn-success" @click.stop.prevent="openModal(role)"><i class="fa fa-edit"></i> Edit</button>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <form class="forms-sample form-horizontal">
+                                <div class="tab-primary">
+                                    <ul class="nav nav-pills" role="tablist">
+                                        <li class="nav-item">
+                                            <a :href="'#nav-pills-' + outterindex + '-1'" class="nav-link active" role="tab" data-toggle="tab">Menus</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a :href="'#nav-pills-' + outterindex + '-2'" class="nav-link" role="tab" data-toggle="tab">Permission</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane active" :id="'nav-pills-' + outterindex + '-1'" >
+                                            <div class="control-group" >
+                                                <label class="control-label" :for="'role-menu-' + role.rid"></label>
+                                                <div class="controls">
+                                                    <div class="row">
+                                                        <div class="col-8">
+                                                            <select data-placeholder="Select Your Menus" v-model="role.menuid" :id="'role-menu-' + role.rid" data-rel="chosen" style="width: 100%;">
+                                                                <option v-for="otherMenu in role.otherMenus" :value="otherMenu.id" >{{otherMenu.name}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="p-20">
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" v-for="(menu,innerindex) in role.sysMenuList">
+                                                        <div class="custom-control custom-checkbox m-b-20">
+                                                            <div class="btn-group">
+                                                                <button type="button" class="btn btn-danger">{{menu.name}}</button>
+                                                                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"></button>
+                                                                <ul class="dropdown-menu" role="menu">
+                                                                    <li><a href="#" @click="deleteMenu(menu,outterindex)">Delete</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade" :id="'nav-pills-' + outterindex + '-2'" >
+                                            <div class="control-group" >
+                                                <label class="control-label" :for="'role-permission-' + role.rid"></label>
+                                                <div class="controls">
+                                                    <div class="row">
+                                                        <div class="col-8">
+                                                            <select data-placeholder="Select Your Permission" v-model="role.permissionid" :id="'role-permission-' + role.rid" data-rel="chosen" style="width: 100%;">
+                                                                <option v-for="otherPermission in role.otherPermissions" :value="otherPermission.id" >{{otherPermission.name}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="p-20">
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" v-for="(permission,innerindex) in role.sysPermissionList">
+                                                        <div class="custom-control custom-checkbox m-b-20">
+                                                            <div class="btn-group">
+                                                                <button type="button" class="btn btn-danger">{{permission.name}}</button>
+                                                                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"></button>
+                                                                <ul class="dropdown-menu" role="menu">
+                                                                    <li><a href="#" @click="deletePermission(permission,outterindex)">Delete</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="role-modal" class="modal fade role-modal modal-danger" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Save/Update</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <form class="form">
+                                            <div class="form-row">
+                                                <div class="form-group col-12">
+                                                    <label for="name">NAME</label>
+                                                    <input type="text" placeholder="Input Your Role Name" class="form-control" id="name" v-model="role.rname">
+                                                </div>
+                                                <div class="form-group col-12">
+                                                    <label for="name">MENUS</label>
+                                                    <select id="role-menus" data-rel="chosen" class="form-control" style="width:100%;">
+                                                        <!--/*<option th:each="menu:${allMenus}" th:value="${menu.id}" th:text="${menu.name}"></option>*/-->
+                                                        <option v-for="menu in menus" :value="menu.id" >{{menu.name}}</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-12">
+                                                    <label for="name">PERMISSIONS</label>
+                                                    <select id="role-permissions" data-rel="chosen" class="form-control" style="width:100%;">
+                                                        <!--/*<option th:each="permission:${allPermissions}" th:value="${permission.id}" th:text="${permission.name}"></option>*/-->
+                                                        <option v-for="permission in permissions" :value="permission.id" >{{permission.name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-common" @click="save()">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div layout:fragment="foot">
+            <script type="text/javascript" th:inline="javascript">
+                /*<![CDATA[*/
+                var data = [[${data}]];
+                var menus = [[${allMenus}]];
+                var permissions = [[${allPermissions}]];
+                var vm = new Vue({
+                    el: '#app',
+                    data: {
+                        roles:data,
+                        role:{
+                            rid:0,
+                            rname:"",
+                            sysMenuList:new Array(),
+                            sysPermissionList:new Array()
+                        },
+                        roleMap:new Map(),
+                        menus:menus,
+                        permissions:permissions
+                    },
+                    created:function(){},
+                    mounted:function(){
+                        for(var i in this.roles){
+                            var that = this.roles[i];
+                            this.roleMap.set('role-menu-' + that["rid"],i);
+                            this.roleMap.set('role-permission-' + that["rid"],i);
+                            $('#role-menu-' + that["rid"]).select2({language: "zh-CN"}).on('change', function (e) {
+                                var index = vm.roleMap.get($(e.target).attr("id"))
+                                axios.post('/api/role/menu/',{
+                                    roleid:vm.roles[index].rid,
+                                    menuid:$(e.target).val()
+                                },{
+                                    transformRequest:[
+                                        function(data){
+                                            return vm.transformRequest(data);
+                                        }
+                                    ]
+                                }).then(response => {
+                                    Object.assign(vm.roles[index],response.data.role)
+                                }).catch(response => {
+                                });
+                            });
+                            $('#role-permission-' + that["rid"]).select2({language: "zh-CN"}).on('change', function (e) {
+                                var index = vm.roleMap.get($(e.target).attr("id"))
+                                axios.post('/api/role/permission/',{
+                                    rid:vm.roles[index].rid,
+                                    pid:$(e.target).val()
+                                },{
+                                    transformRequest:[
+                                        function(data){
+                                            return vm.transformRequest(data);
+                                        }
+                                    ]
+                                }).then(response => {
+                                    Object.assign(vm.roles[index],response.data.role)
+                                }).catch(response => {
+                                });
+                            });
+                        }
+                    },
+                    methods: {
+                        deleteMenu: function(menu,index){
+                            axios.delete('/api/role/menu/' + vm.roles[index].rid + "/" + menu.id)
+                            .then(response => {
+                                Object.assign(vm.roles[index],response.data.role)
+                            }).catch(response => {
+                            });
+                        },
+                        deletePermission:function(permission,index){
+                            axios.delete('/api/role/permission/' + vm.roles[index].rid + '/' + permission.id)
+                            .then(response => {
+                                Object.assign(vm.roles[index],response.data.role)
+                            }).catch(response => {
+                            });
+                        },
+                        save:function(){
+
+                            console.log(111)
+                            console.log(JSON.stringify($("#role-menus").val()));
+                            //return;
+                            var params = new URLSearchParams();
+                            // params.append('sysRole',{rid:vm.role.rid,rname:vm.role.rname});
+                            params.append('rid',vm.role.rid);
+                            params.append('rname',vm.role.rname);
+                            params.append('mids',$("#role-menus").val());
+                            params.append('pids',$("#role-permissions").val());
+                            axios.post('/api/role',params)
+                                .then(response => {
+                                    console.log(response)
+                                }).catch(response => {
+                            });
+                        },
+                        openModal:function(role){
+                            Object.assign(vm.role,{
+                                rid:role.rid,
+                                rname:role.rname,
+                                sysMenuList:role.sysMenuList,
+                                sysPermissionList:role.sysPermissionList
+                            });
+                            $("#role-modal").modal("show");
+                        }
+                    },
+                });
+                $(function(){
+                    $('#role-modal').on('show.bs.modal', function (e) {
+                        var mids = new Array();
+                        var pids = new Array();
+                        for(var i in vm.role.sysMenuList){
+                            mids.push(vm.role.sysMenuList[i].id);
+                        }
+                        for(var i in vm.role.sysPermissionList){
+                            pids.push(vm.role.sysPermissionList[i].id);
+                        }
+                        $('#role-menus').select2({
+                            multiple:true,
+                            placeholder:'Select Your Menus',
+                            dropdownParent:$("#role-modal")
+                        }).val(mids).trigger('change');
+                        $('#role-permissions').select2({
+                            multiple:true,
+                            placeholder:'Select Your Permissions',
+                            dropdownParent:$("#role-modal")
+                        }).val(pids).trigger('change');
+                    });
+                    $('#role-modal').on('hide.bs.modal', function () {
+                        Object.assign(vm.role,{
+                            rid:0,
+                            rname:"",
+                            sysMenuList:new Array(),
+                            sysPermissionList:new Array()
+                        })
+                    });
+                });
+                /*]]>*/
+            </script>
+        </div>
+    </body>
+</html>

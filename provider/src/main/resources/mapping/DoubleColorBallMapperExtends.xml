@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coder.provider.mapper.DoubleColorBallMapper" >
+
+  <resultMap id="BaseResultMap" type="com.coder.base.model.DoubleColorBall" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="redball1" property="redball1" jdbcType="INTEGER" />
+    <id column="redball2" property="redball2" jdbcType="INTEGER" />
+    <id column="redball3" property="redball3" jdbcType="INTEGER" />
+    <id column="redball4" property="redball4" jdbcType="INTEGER" />
+    <id column="redball5" property="redball5" jdbcType="INTEGER" />
+    <id column="redball6" property="redball6" jdbcType="INTEGER" />
+    <id column="blueball" property="blueball" jdbcType="INTEGER" />
+    <id column="createdate" property="createdate" jdbcType="DATE" />
+    <association column="id" property="doubleColorBallOrder" select="com.coder.provider.mapper.DoubleColorBallOrderMapper.selectByPrimaryKey" />
+  </resultMap>
+
+  <sql id="BaseColumn">
+    id,redball1,redball2,redball3,redball4,redball5,redball6,blueball,createdate
+  </sql>
+  <sql id="OrderBy">
+    <if test="orderBy != null and orderBy != ''">
+      order by doublecolorball.${orderBy} ${orderSequnce}
+    </if>
+  </sql>
+  <sql id="WhereCase">
+    <where>
+      <if test="id != null" >
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="redball1 != null" >
+        and redball1 = #{redball1,jdbcType=INTEGER}
+      </if>
+      <if test="redball2 != null" >
+        and redball2 = #{redball2,jdbcType=INTEGER}
+      </if>
+      <if test="redball3 != null" >
+        and redball3 = #{redball3,jdbcType=INTEGER}
+      </if>
+      <if test="redball4 != null" >
+        and redball4 = #{redball4,jdbcType=INTEGER}
+      </if>
+      <if test="redball5 != null" >
+        and redball5 = redball5 #{redball5,jdbcType=INTEGER}
+      </if>
+      <if test="redball6 != null" >
+        and redball6 = #{redball6,jdbcType=INTEGER}
+      </if>
+      <if test="blueball != null" >
+        and blueball = #{blueball,jdbcType=INTEGER}
+      </if>
+      <if test="createdate != null" >
+        and createdate = #{createdate,jdbcType=DATE}
+      </if>
+      <if test="where != null and where != ''">
+        and ${where}
+      </if>
+    </where>
+  </sql>
+
+  <insert id="insert" parameterType="com.coder.base.model.DoubleColorBall" >
+    insert into
+      doublecolorball (id, redball1, redball2, redball3, redball4, redball5,redball6, blueball, createdate)
+    values
+      (#{id,jdbcType=INTEGER}, #{redball1,jdbcType=INTEGER}, #{redball2,jdbcType=INTEGER},
+      #{redball3,jdbcType=INTEGER}, #{redball4,jdbcType=INTEGER}, #{redball5,jdbcType=INTEGER},
+      #{redball6,jdbcType=INTEGER}, #{blueball,jdbcType=INTEGER}, #{createdate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.coder.base.model.DoubleColorBall" >
+    insert into
+      doublecolorball
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="redball1 != null" >
+        redball1,
+      </if>
+      <if test="redball2 != null" >
+        redball2,
+      </if>
+      <if test="redball3 != null" >
+        redball3,
+      </if>
+      <if test="redball4 != null" >
+        redball4,
+      </if>
+      <if test="redball5 != null" >
+        redball5,
+      </if>
+      <if test="redball6 != null" >
+        redball6,
+      </if>
+      <if test="blueball != null" >
+        blueball,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="redball1 != null" >
+        #{redball1,jdbcType=INTEGER},
+      </if>
+      <if test="redball2 != null" >
+        #{redball2,jdbcType=INTEGER},
+      </if>
+      <if test="redball3 != null" >
+        #{redball3,jdbcType=INTEGER},
+      </if>
+      <if test="redball4 != null" >
+        #{redball4,jdbcType=INTEGER},
+      </if>
+      <if test="redball5 != null" >
+        #{redball5,jdbcType=INTEGER},
+      </if>
+      <if test="redball6 != null" >
+        #{redball6,jdbcType=INTEGER},
+      </if>
+      <if test="blueball != null" >
+        #{blueball,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertToBatch" parameterType="java.util.List">
+    <selectKey resultType ="java.lang.Integer" keyProperty="id" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey >
+    insert into
+      doublecolorball (id,redball1,redball2,redball3,redball4,redball5,redball6,blueball,createdate)
+    values
+    <foreach collection="list" item="item" index="index" separator="," >
+      <if test="item != null">
+        (#{item.id,jdbcType=INTEGER},#{item.redball1,jdbcType=INTEGER},#{item.redball2,jdbcType=INTEGER},
+        #{item.redball3,jdbcType=INTEGER},#{item.redball4,jdbcType=INTEGER},#{item.redball5,jdbcType=INTEGER},
+        #{item.redball6,jdbcType=INTEGER},#{item.blueball,jdbcType=INTEGER},#{item.createdate,jdbcType=DATE})
+      </if>
+    </foreach>
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.coder.base.model.DoubleColorBall">
+    update
+      doublecolorball
+    set
+      redball1 = #{redball1,jdbcType=INTEGER},
+      redball2 = #{redball2,jdbcType=INTEGER},
+      redball3 = #{redball3,jdbcType=INTEGER},
+      redball4 = #{redball4,jdbcType=INTEGER},
+      redball5 = #{redball5,jdbcType=INTEGER},
+      redball6 = #{redball6,jdbcType=INTEGER},
+      blueball = #{blueball,jdbcType=INTEGER}
+    where
+      id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateSelectiveByPrimaryKey" parameterType="com.coder.base.model.DoubleColorBall">
+    update
+      doublecolorball
+    <set>
+      <if test="redball1 != null" >
+        redball1 = #{redball1,jdbcType=INTEGER},
+      </if>
+      <if test="redball2 != null" >
+        redball2 = #{redball2,jdbcType=INTEGER},
+      </if>
+      <if test="redball3 != null" >
+        redball3 = #{redball3,jdbcType=INTEGER},
+      </if>
+      <if test="redball4 != null" >
+        redball4 = #{redball4,jdbcType=INTEGER},
+      </if>
+      <if test="redball5 != null" >
+        redball5 = #{redball5,jdbcType=INTEGER},
+      </if>
+      <if test="redball6 != null" >
+        redball6 = #{redball6,jdbcType=INTEGER},
+      </if>
+      <if test="blueball != null" >
+        blueball = #{blueball,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=INTEGER},
+      </if>
+    </set>
+    <where>
+      id = #{id,jdbcType=INTEGER}
+    </where>
+  </update>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+      <include refid="BaseColumn"></include>
+    from
+      doublecolorball
+    where
+      id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByProperty" resultMap="BaseResultMap" parameterType="com.coder.base.model.DoubleColorBall">
+    select
+      <include refid="BaseColumn"></include>
+    from
+      doublecolorball
+    <include refid="WhereCase"></include>
+  </select>
+  <select id="selectByVo" resultMap="BaseResultMap" parameterType="com.coder.base.model.DoubleColorBall">
+    select
+      <include refid="BaseColumn"></include>
+    from
+      doublecolorball
+    <include refid="WhereCase"></include>
+    <include refid="OrderBy"></include>
+  </select>
+
+  <select id="findCount" resultType="java.lang.Integer" parameterType="com.coder.base.model.DoubleColorBall">
+    select
+      count(id)
+    from
+      doublecolorball
+    <include refid="WhereCase"></include>
+  </select>
+
+</mapper>

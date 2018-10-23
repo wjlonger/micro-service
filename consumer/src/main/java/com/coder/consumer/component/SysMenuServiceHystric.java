@@ -14,4 +14,18 @@ public class SysMenuServiceHystric implements SysMenuService {
         return null;
     }
 
+    @Override
+    public int save(SysMenu sysMenu) {
+        return 0;
+    }
+
+    @Override
+    public SysMenu selectByPrimaryKey(Integer id) {
+        return null;
+    }
+
+    @Override
+    public int deleteByPrimaryKey(Integer id) {
+        return 0;
+    }
 }

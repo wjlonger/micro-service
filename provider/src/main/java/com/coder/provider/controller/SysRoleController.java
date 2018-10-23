@@ -8,6 +8,8 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,71 +23,72 @@ public class SysRoleController {
     @Autowired
     private SysRoleService sysRoleService;
 
-    public int deleteByPrimaryKey(Integer rid) {
-        return sysRoleService.deleteByPrimaryKey(rid);
-    }
-
-    public int deleteByVo(SysRole sysRole) {
-        return sysRoleService.deleteByVo(sysRole);
-    }
-
-    public int insert(SysRole sysRole) {
-        return sysRoleService.insert(sysRole);
-    }
-
-    public int insertSelective(SysRole sysRole) {
-        return sysRoleService.insertSelective(sysRole);
-    }
-
-    public int insertToBatch(List<SysRole> sysRoles) {
-        return sysRoleService.insertToBatch(sysRoles);
-    }
-
-    public int updateByPrimaryKeySelective(SysRole sysRole) {
-        return sysRoleService.updateByPrimaryKeySelective(sysRole);
-    }
-
-    public int updateByPrimaryKey(SysRole sysRole) {
-        return sysRoleService.updateByPrimaryKey(sysRole);
-    }
-
-    public int save(SysRole sysRole) {
-        return sysRoleService.save(sysRole);
-    }
-
-    public SysRole selectByPrimaryKey(Integer rid) {
-        return sysRoleService.selectByPrimaryKey(rid);
-    }
-
-    public List<SysRole> selectAll(SysRole sysRole) {
+    @PostMapping("/selectAll")
+    public List<SysRole> selectAll(@RequestBody SysRole sysRole) {
         return sysRoleService.selectAll(sysRole);
     }
 
-    public PageInfo<SysRole> selectPage(int pageIndex, int pageSize, SysRole sysRole) {
-        return sysRoleService.selectPage(pageIndex, pageSize, sysRole);
-    }
-
-    public SysRole selectByProperty(SysRole sysRole) {
-        return sysRoleService.selectByProperty(sysRole);
-    }
-
-    public int findCount(SysRole sysRole) {
-        return sysRoleService.findCount(sysRole);
-    }
-
-    public List<SysMenu> selectMenusByPrimaryKey(Integer id) {
-        return sysRoleService.selectMenusByPrimaryKey(id);
-    }
-
-    public List<SysPermission> selectPermissionByPrimaryKey(Integer id) {
-        return sysRoleService.selectPermissionByPrimaryKey(id);
-    }
-
-    public List<SysMenu> selectOtherMenusByPrimaryKey(Integer id) {
-        return sysRoleService.selectOtherMenusByPrimaryKey(id);
-    }
-
-    public List<SysPermission> selectOtherPermissionByPrimaryKey(Integer id) {
-        return sysRoleService.selectOtherPermissionByPrimaryKey(id);
-    }
+//    public int deleteByPrimaryKey(Integer rid) {
+//        return sysRoleService.deleteByPrimaryKey(rid);
+//    }
+//
+//    public int deleteByVo(SysRole sysRole) {
+//        return sysRoleService.deleteByVo(sysRole);
+//    }
+//
+//    public int insert(SysRole sysRole) {
+//        return sysRoleService.insert(sysRole);
+//    }
+//
+//    public int insertSelective(SysRole sysRole) {
+//        return sysRoleService.insertSelective(sysRole);
+//    }
+//
+//    public int insertToBatch(List<SysRole> sysRoles) {
+//        return sysRoleService.insertToBatch(sysRoles);
+//    }
+//
+//    public int updateByPrimaryKeySelective(SysRole sysRole) {
+//        return sysRoleService.updateByPrimaryKeySelective(sysRole);
+//    }
+//
+//    public int updateByPrimaryKey(SysRole sysRole) {
+//        return sysRoleService.updateByPrimaryKey(sysRole);
+//    }
+//
+//    public int save(SysRole sysRole) {
+//        return sysRoleService.save(sysRole);
+//    }
+//
+//    public SysRole selectByPrimaryKey(Integer rid) {
+//        return sysRoleService.selectByPrimaryKey(rid);
+//    }
+//
+//    public PageInfo<SysRole> selectPage(int pageIndex, int pageSize, SysRole sysRole) {
+//        return sysRoleService.selectPage(pageIndex, pageSize, sysRole);
+//    }
+//
+//    public SysRole selectByProperty(SysRole sysRole) {
+//        return sysRoleService.selectByProperty(sysRole);
+//    }
+//
+//    public int findCount(SysRole sysRole) {
+//        return sysRoleService.findCount(sysRole);
+//    }
+//
+//    public List<SysMenu> selectMenusByPrimaryKey(Integer id) {
+//        return sysRoleService.selectMenusByPrimaryKey(id);
+//    }
+//
+//    public List<SysPermission> selectPermissionByPrimaryKey(Integer id) {
+//        return sysRoleService.selectPermissionByPrimaryKey(id);
+//    }
+//
+//    public List<SysMenu> selectOtherMenusByPrimaryKey(Integer id) {
+//        return sysRoleService.selectOtherMenusByPrimaryKey(id);
+//    }
+//
+//    public List<SysPermission> selectOtherPermissionByPrimaryKey(Integer id) {
+//        return sysRoleService.selectOtherPermissionByPrimaryKey(id);
+//    }
 }

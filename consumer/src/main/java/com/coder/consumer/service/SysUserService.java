@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(value="provider",fallback = SysUserServiceHystric.class,path = "/sysuser")
-public interface SysUserService {
+public interface SysUserService extends com.coder.base.service.SysUserService {
 
     /**
      * 在 FeignConfig  如果配置了 Feign ,那么请求的时候只能用 Feign自己的参数请求，使用SpringMVC的请求就会出错
@@ -16,7 +16,9 @@ public interface SysUserService {
      * @param sysUser
      * @return
      */
-    @RequestLine("POST /selectbyproperty")
+    @Override
+    @RequestLine("POST /selectByProperty")
     SysUser selectByProperty(@RequestBody SysUser sysUser);
+
 
 }

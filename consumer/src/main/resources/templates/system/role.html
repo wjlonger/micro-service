@@ -22,6 +22,9 @@
                             <a class="btn btn-app pull-right" th:href="'#'">
                                 <button class="btn btn-success" @click.stop.prevent="openModal(role)"><i class="fa fa-edit"></i> Edit</button>
                             </a>
+                            <a class="btn btn-app pull-right" th:href="'#'">
+                                <button class="btn btn-danger" @click.stop.prevent="delRole(role)"><i class="fa fa-trash-o"></i> Delete</button>
+                            </a>
                         </div>
                         <div class="card-body">
                             <form class="forms-sample form-horizontal">
@@ -220,7 +223,7 @@
                                 '/api/role',
                                 params
                             ).then(response => {
-                                Object.assign(vm.roles,response.data.role);
+                                Object.assign(vm.roles,response.data.roles);
                                 $("#role-modal").modal("hide");
                             }).catch(response => {
                             });
@@ -233,8 +236,19 @@
                                 sysPermissionList:role.sysPermissionList
                             });
                             $("#role-modal").modal("show");
+                        },
+                        delRole : function(role){
+                            layer.confirm('确定要删除吗？', {
+                                btn: ['确定','取消']
+                            }, function(){
+                                axios.delete(
+                                    '/api/role/' + role.rid
+                                ).then(response => {
+                                    Object.assign(vm.roles,response.data.roles);
+                                })
+                            }, function(){});
                         }
-                    },
+                    }
                 });
                 $(function(){
                     $('#role-modal').on('show.bs.modal', function (e) {

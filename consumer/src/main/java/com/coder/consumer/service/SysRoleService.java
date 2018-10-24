@@ -5,6 +5,7 @@ import com.coder.consumer.component.SysRoleServiceHystric;
 import feign.Param;
 import feign.RequestLine;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
@@ -23,4 +24,8 @@ public interface SysRoleService extends com.coder.base.service.SysRoleService {
     @Override
     @RequestLine("POST /save")
     SysRole save(@RequestBody SysRole sysRole);
+
+    @Override
+    @RequestLine("DELETE /deleteByPrimaryKey/{id}")
+    int deleteByPrimaryKey(@Param("id") Integer rid);
 }

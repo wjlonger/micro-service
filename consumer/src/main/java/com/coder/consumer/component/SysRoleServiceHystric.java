@@ -20,6 +20,11 @@ public class SysRoleServiceHystric implements SysRoleService {
     }
 
     @Override
+    public int deleteByPrimaryKey(Integer rid) {
+        return 0;
+    }
+
+    @Override
     public List<SysRole> selectAll(SysRole sysRole) {
         return null;
     }

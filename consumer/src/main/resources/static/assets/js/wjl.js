@@ -52,10 +52,12 @@ axios.interceptors.request.use(function(config){
 });
 //添加一个响应拦截器
 axios.interceptors.response.use(function(res){
+    layer.closeAll();
     NProgress.done();
     new Vue().showNotification(res.data)
     return res;
 },function(err){
+    layer.closeAll();
     NProgress.done();
     return Promise.reject(error);
 });

@@ -12,8 +12,8 @@ public interface SysRoleService {
 
     SysRole save(SysRole sysRole);
 
-//    int deleteByPrimaryKey(Integer rid);
-//
+    int deleteByPrimaryKey(Integer rid);
+
 //    int deleteByVo(SysRole sysRole);
 //
 //    int insert(SysRole sysRole);

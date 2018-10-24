@@ -26,7 +26,6 @@
                                 <a href="#" @click.prevent.stop="add(menu)" class="btn btn-round btn-default"><i class="mdi mdi-database-plus"></i></a>
                                 <a href="#" @click.prevent.stop="update(menu)" class="btn btn-round btn-default"><i class="fa fa-gear"></i></a>
                                 <a href="#" @click.prevent.stop="delParentMenu(menu,outterindex)" class="btn btn-round btn-default"><i class="fa fa-trash-o"></i></a>
-
                             </div>
                         </div>
                         <div class="box-content" v-if="menu.show">
@@ -195,9 +194,7 @@
                                         }
                                     }).catch(response => {
                                 })
-                                layer.closeAll()
                             }, function(){});
-
                         }
                     }
                 });

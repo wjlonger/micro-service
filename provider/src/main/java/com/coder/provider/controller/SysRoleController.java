@@ -33,10 +33,11 @@ public class SysRoleController {
         return sysRole;
     }
 
-//    public int deleteByPrimaryKey(Integer rid) {
-//        return sysRoleService.deleteByPrimaryKey(rid);
-//    }
-//
+    @DeleteMapping("/deleteByPrimaryKey/{id}")
+    public int deleteByPrimaryKey(@PathVariable("id") Integer rid) {
+        return sysRoleService.deleteByPrimaryKey(rid);
+    }
+
 //    public int deleteByVo(SysRole sysRole) {
 //        return sysRoleService.deleteByVo(sysRole);
 //    }

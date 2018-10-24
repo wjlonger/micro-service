@@ -38,11 +38,11 @@ public class SysRoleServiceImpl implements SysRoleService {
         return sysRole;
     }
 
-//    @Override
-//    public int deleteByPrimaryKey(Integer rid) {
-//        return sysRoleMapper.deleteByPrimaryKey(rid);
-//    }
-//
+    @Override
+    public int deleteByPrimaryKey(Integer rid) {
+        return sysRoleMapper.deleteByPrimaryKey(rid);
+    }
+
 //    @Override
 //    public int deleteByVo(SysRole sysRole) {
 //        return sysRoleMapper.deleteByProperty(sysRole);

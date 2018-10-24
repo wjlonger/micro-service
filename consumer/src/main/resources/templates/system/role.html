@@ -168,9 +168,7 @@
                     mounted:function(){
                         this.select2();
                     },
-                    updated:function(){
-                        this.select2();
-                    },
+                    updated:function(){},
                     methods: {
                         deleteMenu: function(menu,index){
                             axios.delete('/api/role/menu/' + vm.roles[index].rid + "/" + menu.id)
@@ -198,6 +196,7 @@
                             ).then(response => {
                                 if(response.data.code == 1){
                                     vm.roles.push(response.data.role)
+                                    vm.select2();
                                     $("#role-modal").modal("hide");
                                 }
                             }).catch(response => {});

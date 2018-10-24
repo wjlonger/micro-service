@@ -10,7 +10,7 @@ public interface SysRoleService {
 
     List<SysRole> selectAll(SysRole sysRole);
 
-    int save(SysRole sysRole);
+    SysRole save(SysRole sysRole);
 
 //    int deleteByPrimaryKey(Integer rid);
 //

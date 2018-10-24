@@ -27,15 +27,15 @@ public class SysRoleServiceImpl implements SysRoleService {
     }
 
     @Override
-    public int save(SysRole sysRole) {
-        if(sysRole == null){
-            return 0;
-        }
+    public SysRole save(SysRole sysRole) {
+        if(sysRole == null)
+            return sysRole;
         SysRole temp = sysRoleMapper.selectByPrimaryKey(sysRole.getRid());
-        if(temp == null){
-            return sysRoleMapper.insert(sysRole);
-        }
-        return sysRoleMapper.updateByPrimaryKeySelective(sysRole);
+        if(temp == null)
+            sysRoleMapper.insert(sysRole);
+        else
+            sysRoleMapper.updateByPrimaryKeySelective(sysRole);
+        return sysRole;
     }
 
 //    @Override

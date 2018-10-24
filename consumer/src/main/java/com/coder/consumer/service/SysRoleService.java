@@ -22,5 +22,5 @@ public interface SysRoleService extends com.coder.base.service.SysRoleService {
 
     @Override
     @RequestLine("POST /save")
-    int save(@RequestBody SysRole sysRole);
+    SysRole save(@RequestBody SysRole sysRole);
 }

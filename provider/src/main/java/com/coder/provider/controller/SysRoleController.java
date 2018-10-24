@@ -28,8 +28,9 @@ public class SysRoleController {
     }
 
     @PostMapping("/save")
-    public int save(@RequestBody SysRole sysRole) {
-        return sysRoleService.save(sysRole);
+    public SysRole save(@RequestBody SysRole sysRole) {
+        sysRoleService.save(sysRole);
+        return sysRole;
     }
 
 //    public int deleteByPrimaryKey(Integer rid) {

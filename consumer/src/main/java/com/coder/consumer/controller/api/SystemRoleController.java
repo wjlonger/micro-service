@@ -32,7 +32,7 @@ public class SystemRoleController {
     private RolePermissionService rolePermissionService;
 
     @PostMapping("/menu")
-    private String saveMenu(@RequestBody RoleMenu roleMenu){
+    public String saveMenu(@RequestBody RoleMenu roleMenu){
         int i = roleMenuService.insert(roleMenu);
         JSONObject json = new JSONObject();
         JsonUtils.addMessage(i,json);
@@ -44,7 +44,7 @@ public class SystemRoleController {
     }
 
     @PostMapping("/permission")
-    private String savePermission(@RequestBody RolePermission rolePermission){
+    public String savePermission(@RequestBody RolePermission rolePermission){
         int i = rolePermissionService.insert(rolePermission);
         JSONObject json = new JSONObject();
         JsonUtils.addMessage(i,json);
@@ -56,7 +56,7 @@ public class SystemRoleController {
     }
 
     @DeleteMapping("/menu/{roleid}/{menuid}")
-    private String deleteMenu(@PathVariable("roleid") int roleid, @PathVariable("menuid") int menuid){
+    public String deleteMenu(@PathVariable("roleid") int roleid, @PathVariable("menuid") int menuid){
         RoleMenu roleMenu = new RoleMenu();
         roleMenu.setRoleid(roleid);
         roleMenu.setMenuid(menuid);
@@ -71,7 +71,7 @@ public class SystemRoleController {
     }
 
     @DeleteMapping("/permission/{roleid}/{permissionid}")
-    private String deletePermission(@PathVariable("roleid") int roleid, @PathVariable("permissionid") int permissionid){
+    public String deletePermission(@PathVariable("roleid") int roleid, @PathVariable("permissionid") int permissionid){
         RolePermission rolePermission = new RolePermission();
         rolePermission.setRid(roleid);
         rolePermission.setPid(permissionid);
@@ -86,16 +86,16 @@ public class SystemRoleController {
     }
 
     @PostMapping
-    private String save(SysRole sysRole,String[] mids, String[] pids){
-        int i = sysRoleService.save(sysRole);
+    public String save(SysRole sysRole,String[] mids, String[] pids){
+        SysRole that = sysRoleService.save(sysRole);
         JSONObject json = new JSONObject();
-        JsonUtils.addMessage(i,json);
-        if(i > 0){
+        JsonUtils.addMessage(that.getRid(),json);
+        if(that.getRid() > 0){
             RoleMenu roleMenu = new RoleMenu();
-            roleMenu.setRoleid(sysRole.getRid());
+            roleMenu.setRoleid(that.getRid());
             roleMenuService.deleteByProperty(roleMenu);
             RolePermission rolePermission = new RolePermission();
-            rolePermission.setRid(sysRole.getRid());
+            rolePermission.setRid(that.getRid());
             rolePermissionService.deleteByProperty(rolePermission);
             if(!CollectionUtils.isNullOrEmptyStrict(mids)){
                 for(String mid : mids){
@@ -103,7 +103,7 @@ public class SystemRoleController {
                         int imid = Integer.parseInt(mid);
                         if(imid > 0){
                             RoleMenu rm = new RoleMenu();
-                            rm.setRoleid(sysRole.getRid());
+                            rm.setRoleid(that.getRid());
                             rm.setMenuid(imid);
                             roleMenuService.insert(rm);
                         }
@@ -116,14 +116,14 @@ public class SystemRoleController {
                         int ipid = Integer.parseInt(pid);
                         if(ipid > 0){
                             RolePermission rp = new RolePermission();
-                            rp.setRid(roleMenu.getRoleid());
+                            rp.setRid(that.getRid());
                             rp.setPid(ipid);
                             rolePermissionService.insert(rp);
                         }
                     }
                 }
             }
-            List<SysRole> sysRoles = sysRoleService.selectAll(null);
+            List<SysRole> sysRoles = sysRoleService.selectAll(new SysRole());
             json.put("roles",sysRoles);
         }
         return json.toString();

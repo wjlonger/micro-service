@@ -53,22 +53,22 @@
   </delete>
 
   <!-- 插入数据并赋值到领域模型 方法一 -->
-  <!--<insert id="insert" parameterType="com.coder.base.model.SysRole" >-->
-    <!--<selectKey resultType ="java.lang.Integer" keyProperty="rid" order="AFTER">-->
-      <!--select LAST_INSERT_ID() as rid-->
-    <!--</selectKey >-->
-    <!--insert into-->
-      <!--sys_role (rid, rname)-->
-    <!--values-->
-      <!--(#{rid,jdbcType=INTEGER}, #{rname,jdbcType=VARCHAR})-->
-  <!--</insert>-->
-  <!-- 插入数据并赋值到领域模型 方法二 -->
-  <insert id="insert" parameterType="com.coder.base.model.SysRole" useGeneratedKeys="true" keyProperty="rid" >
+  <insert id="insert" parameterType="com.coder.base.model.SysRole" >
+    <selectKey resultType ="java.lang.Integer" keyProperty="rid" order="AFTER">
+      select LAST_INSERT_ID() as rid
+    </selectKey >
     insert into
       sys_role (rid, rname)
     values
       (#{rid,jdbcType=INTEGER}, #{rname,jdbcType=VARCHAR})
   </insert>
+  <!-- 插入数据并赋值到领域模型 方法二 -->
+  <!--<insert id="insert" parameterType="com.coder.base.model.SysRole" useGeneratedKeys="true" keyProperty="rid" >-->
+    <!--insert into-->
+      <!--sys_role (rid, rname)-->
+    <!--values-->
+      <!--(#{rid,jdbcType=INTEGER}, #{rname,jdbcType=VARCHAR})-->
+  <!--</insert>-->
   <insert id="insertSelective" parameterType="com.coder.base.model.SysRole" >
     insert into
       sys_role

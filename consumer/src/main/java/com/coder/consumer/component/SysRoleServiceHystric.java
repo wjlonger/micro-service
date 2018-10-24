@@ -15,8 +15,8 @@ public class SysRoleServiceHystric implements SysRoleService {
     }
 
     @Override
-    public int save(SysRole sysRole) {
-        return 0;
+    public SysRole save(SysRole sysRole) {
+        return sysRole;
     }
 
     @Override

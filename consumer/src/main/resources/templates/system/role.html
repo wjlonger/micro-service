@@ -23,7 +23,7 @@
                                 <button class="btn btn-success" @click.stop.prevent="openModal(role)"><i class="fa fa-edit"></i> Edit</button>
                             </a>
                             <a class="btn btn-app pull-right" th:href="'#'">
-                                <button class="btn btn-danger" @click.stop.prevent="delRole(role)"><i class="fa fa-trash-o"></i> Delete</button>
+                                <button class="btn btn-danger" @click.stop.prevent="delRole(role,outterindex)"><i class="fa fa-trash-o"></i> Delete</button>
                             </a>
                         </div>
                         <div class="card-body">
@@ -44,7 +44,7 @@
                                                 <div class="controls">
                                                     <div class="row">
                                                         <div class="col-8">
-                                                            <select data-placeholder="Select Your Menus" v-model="role.menuid" :id="'role-menu-' + role.rid" data-rel="chosen" style="width: 100%;">
+                                                            <select data-placeholder="Select Your Menus" class="select2 role-menu-select2" v-model="role.menuid" :id="'role-menu-' + role.rid" :data-id="role.rid" :data-index="outterindex" data-rel="chosen" style="width: 100%;">
                                                                 <option v-for="otherMenu in role.otherMenus" :value="otherMenu.id" >{{otherMenu.name}}</option>
                                                             </select>
                                                         </div>
@@ -73,7 +73,7 @@
                                                 <div class="controls">
                                                     <div class="row">
                                                         <div class="col-8">
-                                                            <select data-placeholder="Select Your Permission" v-model="role.permissionid" :id="'role-permission-' + role.rid" data-rel="chosen" style="width: 100%;">
+                                                            <select data-placeholder="Select Your Permission" class="select2 role-permission-select2" v-model="role.permissionid" :id="'role-permission-' + role.rid" :data-id="role.rid" :data-index="outterindex" data-rel="chosen" style="width: 100%;">
                                                                 <option v-for="otherPermission in role.otherPermissions" :value="otherPermission.id" >{{otherPermission.name}}</option>
                                                             </select>
                                                         </div>
@@ -151,50 +151,25 @@
         <div layout:fragment="foot">
             <script type="text/javascript" th:inline="javascript">
                 /*<![CDATA[*/
-                var data = [[${data}]];
-                var menus = [[${allMenus}]];
-                var permissions = [[${allPermissions}]];
                 var vm = new Vue({
                     el: '#app',
                     data: {
-                        roles:data,
+                        roles:[[${data}]],
                         role:{
                             rid:0,
                             rname:"",
                             sysMenuList:new Array(),
                             sysPermissionList:new Array()
                         },
-                        roleMap:new Map(),
-                        menus:menus,
-                        permissions:permissions
+                        menus:[[${allMenus}]],
+                        permissions:[[${allPermissions}]]
                     },
                     created:function(){},
                     mounted:function(){
-                        for(var i in this.roles){
-                            var that = this.roles[i];
-                            this.roleMap.set('role-menu-' + that["rid"],i);
-                            this.roleMap.set('role-permission-' + that["rid"],i);
-                            $('#role-menu-' + that["rid"]).select2({language: "zh-CN"}).on('change', function (e) {
-                                var index = vm.roleMap.get($(e.target).attr("id"))
-                                axios.post('/api/role/menu/',{
-                                    roleid:vm.roles[index].rid,
-                                    menuid:$(e.target).val()
-                                }).then(response => {
-                                    Object.assign(vm.roles[index],response.data.role);
-                                }).catch(response => {
-                                });
-                            });
-                            $('#role-permission-' + that["rid"]).select2({language: "zh-CN"}).on('change', function (e) {
-                                var index = vm.roleMap.get($(e.target).attr("id"))
-                                axios.post('/api/role/permission/',{
-                                    rid:vm.roles[index].rid,
-                                    pid:$(e.target).val()
-                                }).then(response => {
-                                    Object.assign(vm.roles[index],response.data.role)
-                                }).catch(response => {
-                                });
-                            });
-                        }
+                        this.select2();
+                    },
+                    updated:function(){
+                        this.select2();
                     },
                     methods: {
                         deleteMenu: function(menu,index){
@@ -223,10 +198,11 @@
                                 '/api/role',
                                 params
                             ).then(response => {
-                                Object.assign(vm.roles,response.data.roles);
-                                $("#role-modal").modal("hide");
-                            }).catch(response => {
-                            });
+                                if(response.data.code == 1){
+                                    vm.roles.push(response.data.role)
+                                    $("#role-modal").modal("hide");
+                                }
+                            }).catch(response => {});
                         },
                         openModal:function(role){
                             Object.assign(vm.role,{
@@ -237,16 +213,39 @@
                             });
                             $("#role-modal").modal("show");
                         },
-                        delRole : function(role){
+                        delRole : function(role,index){
                             layer.confirm('确定要删除吗？', {
                                 btn: ['确定','取消']
                             }, function(){
                                 axios.delete(
                                     '/api/role/' + role.rid
                                 ).then(response => {
-                                    Object.assign(vm.roles,response.data.roles);
+                                    if(response.data.code == 1){
+                                        vm.roles.splice(index,1);
+                                    }
                                 })
                             }, function(){});
+                        },
+                        select2:function(){
+                            for(var i in this.roles){
+                                var role = this.roles[i];
+                                $('#role-menu-' + role.rid).select2({language: "zh-CN"}).on('change', function (e) {
+                                    axios.post('/api/role/menu/',{
+                                        roleid:$(e.target).attr("data-id"),
+                                        menuid:$(e.target).val()
+                                    }).then(response => {
+                                        Object.assign(vm.roles[parseInt($(e.target).attr("data-index"))],response.data.role);
+                                    }).catch(response => {})
+                                });
+                                $('#role-permission-' + role.rid).select2({language: "zh-CN"}).on('change', function (e) {
+                                    axios.post('/api/role/permission/',{
+                                        rid:$(e.target).attr("data-id"),
+                                        pid:$(e.target).val()
+                                    }).then(response => {
+                                        Object.assign(vm.roles[parseInt($(e.target).attr("data-index"))],response.data.role);
+                                    }).catch(response => {});
+                                });
+                            }
                         }
                     }
                 });

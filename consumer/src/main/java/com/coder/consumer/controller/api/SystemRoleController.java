@@ -123,9 +123,9 @@ public class SystemRoleController {
                     }
                 }
             }
+            that = sysRoleService.selectByPrimaryKey(that.getRid());
+            json.put("role",that);
         }
-        List<SysRole> sysRoles = sysRoleService.selectAll(new SysRole());
-        json.put("roles",sysRoles);
         return json.toString();
     }
 
@@ -134,16 +134,6 @@ public class SystemRoleController {
         int i = sysRoleService.deleteByPrimaryKey(rid);
         JSONObject json = new JSONObject();
         JsonUtils.addMessage(i,json);
-        if(i > 0){
-            RoleMenu roleMenu = new RoleMenu();
-            roleMenu.setRoleid(rid);
-            roleMenuService.deleteByProperty(roleMenu);
-            RolePermission rolePermission = new RolePermission();
-            rolePermission.setRid(rid);
-            rolePermissionService.deleteByProperty(rolePermission);
-        }
-        List<SysRole> sysRoles = sysRoleService.selectAll(new SysRole());
-        json.put("roles",sysRoles);
         return json.toString();
     }
 }

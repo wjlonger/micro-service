@@ -9,3 +9,6 @@ div#nprogress div.bar{
 tr .fa{
     font-size: 24px;
 }
+.page-container{
+    z-index:1030 !important;
+}

@@ -176,13 +176,15 @@
                             axios.delete('/api/role/menu/' + vm.roles[index].rid + "/" + menu.id)
                             .then(response => {
                                 Object.assign(vm.roles[index],response.data.role)
-                            }).catch(response => {});
+                            }).catch(response => {
+                            });
                         },
                         deletePermission:function(permission,index){
                             axios.delete('/api/role/permission/' + vm.roles[index].rid + '/' + permission.id)
                             .then(response => {
                                 Object.assign(vm.roles[index],response.data.role)
-                            }).catch(response => {});
+                            }).catch(response => {
+                            });
                         },
                         save:function(){
                             var params = new URLSearchParams();

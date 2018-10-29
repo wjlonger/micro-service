@@ -192,7 +192,7 @@
                             '/api/role',
                             params
                         ).then(response => {
-                            if(response.data.code == 1){
+                            if(response.data.code === 1){
                             vm.roles.push(response.data.role)
                             vm.select2();
                             $("#role-modal").modal("hide");
@@ -215,7 +215,7 @@
                             axios.delete(
                                 '/api/role/' + role.rid
                             ).then(response => {
-                                if(response.data.code == 1){
+                                if(response.data.code === 1){
                                 vm.roles.splice(index,1);
                             }
                         })

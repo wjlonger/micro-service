@@ -2,9 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       lang="zh-CN">
-<head></head>
-<body>
-    <div th:fragment="foot">
+    <footer th:fragment="foot(scriptsPaths)">
         <script src="/static/assets/js/jquery-min.js" th:src="@{'https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js'}"></script>
         <script src="https://cdn.bootcss.com/popper.js/1.14.3/umd/popper.min.js" th:src="@{'https://cdn.bootcss.com/popper.js/1.14.3/umd/popper.min.js'}"></script>
         <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js" th:src="@{'https://cdn.bootcss.com/vue/2.5.16/vue.min.js'}"></script>
@@ -17,7 +15,7 @@
         <script src="https://cdn.bootcss.com/select2/4.0.5/js/select2.min.js" th:src="@{'https://cdn.bootcss.com/select2/4.0.5/js/select2.min.js'}"></script>
         <script src="/static/assets/js/main.js" th:src="@{'/static/assets/js/main.js'}"></script>
         <script src="/static/assets/js/wjl.js" th:src="@{'/static/assets/js/wjl.js'}"></script>
-
+        <script type="text/javascript" th:each="scriptPath,status:${#strings.setSplit(scriptsPaths,',')}" th:src="@{${scriptPath}}"></script>
         <!--/*<script src="https://cdn.bootcss.com/select2/4.0.5/js/i18n/zh-CN.js" th:src="@{'https://cdn.bootcss.com/select2/4.0.5/js/i18n/zh-CN.js'}"></script>*/-->
         <!--/*<script src="/assets/js/light-bootstrap-dashboard.js" th:src="@{'/assets/js/light-bootstrap-dashboard.js'}"></script>*/-->
         <!--/* <script src="/assets/js/wjl.js" th:src="@{'/assets/js/wjl.js'}"></script> */-->
@@ -25,6 +23,5 @@
         <!--/* <script src="/assets/plugins/morris/morris.min.js" th:src="@{'/assets/plugins/morris/morris.min.js'}"></script> */-->
         <!--/* <script src="/assets/plugins/raphael/raphael-min.js" th:src="@{'/assets/plugins/raphael/raphael-min.js'}"></script> */-->
         <!--/* <script src="/assets/js/dashborad1.js" th:src="@{'/assets/js/dashborad1.js'}"></script> */-->
-    </div>
-</body>
+    </footer>
 </html>

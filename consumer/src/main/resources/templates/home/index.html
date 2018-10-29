@@ -2,13 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       lang="zh-CN">
-<head>
-    <head th:include="home/header::header"></head>
-    <title>wujunlong.com</title>
-    <meta name="description" content="吴俊龙简历" />
-    <!--/* Theme CSS */-->
-    <link rel="stylesheet" href="/static/css/wjl_styles.css" th:href="@{'/static/css/wjl_styles.css'}" />
-</head>
+<head th:replace="home/header::header('wujunlong.com',null)"></head>
 <body>
 <header class="header">
     <div class="top-bar container-fluid">
@@ -317,11 +311,6 @@
         </div>
     </section>
 </div>
-<footer>
-    <div th:include="home/footer::footer"></div>
-    <script type="text/javascript" src="/static/js/back-to-top.js" th:src="@{'/static/js/back-to-top.js'}"></script>
-    <script type="text/javascript" src="/static/js/main.js" th:src="@{'/static/js/main.js'}"></script>
-    <script type="text/javascript" src="/static/js/style-switcher.js" th:src="@{'/static/js/style-switcher.js'}"></script>
-</footer>
+<footer th:include="home/footer::footer(null)"></footer>
 </body>
 </html>

@@ -3,17 +3,15 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       lang="zh-CN">
-    <head>
-        <div th:replace="layout/head::head"></div>
-    </head>
+    <head th:replace="layout/head::head(${cssPaths})"></head>
     <body>
         <div class="app header-default side-nav-dark">
             <div class="layout">
-                <div class="header navbar" th:include="layout/navbar::navbar"></div>
-                <div class="side-nav expand-lg" th:include="layout/nav::nav"></div>
+                <div th:replace="layout/navbar::navbar"></div>
+                <div th:replace="layout/nav::nav"></div>
                 <div class="page-container">
                     <div class="main-content">
-                        <div class="container-fluid" th:include="layout/title::title"></div>
+                        <div th:replace="layout/title::title"></div>
                         <div class="container-fluid" layout:fragment="content"></div>
                     </div>
                 </div>
@@ -22,7 +20,7 @@
         <div id="preloader">
             <div class="loader" id="loader-1"></div>
         </div>
-        <div th:include="layout/foot::foot"></div>
+        <footer th:include="layout/foot::foot(${scriptPaths})"></footer>
         <div layout:fragment="foot"></div>
     </body>
 </html>

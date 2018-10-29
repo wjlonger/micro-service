@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       lang="zh-CN">
-<head th:fragment="head">
+<head th:fragment="head(cssPaths)">
     <title th:text="${title} + '管理后台'">管理后台</title>
     <meta name="description" content="吴俊龙管理后台" />
     <meta http-equiv="Content-Type" content="text/html;" charset="UTF-8"/>
@@ -19,16 +19,10 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" th:href="@{'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css'}" charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/select2/4.0.5/css/select2.min.css" th:href="@{'https://cdn.bootcss.com/select2/4.0.5/css/select2.min.css'}" charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/static/assets/css/responsive.css" th:href="@{'/static/assets/css/responsive.css'}" charset="UTF-8">
-
     <!--/* 自行添加的样式 s */-->
     <link rel="stylesheet" type="text/css" href="/static/assets/css/charisma-app.css" th:href="@{'/static/assets/css/charisma-app.css'}" charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/static/assets/css/wjl.css" th:href="@{'/static/assets/css/wjl.css'}" charset="UTF-8">
     <!--/* 自行添加的样式 e */-->
-
+    <link rel="stylesheet" type="text/css" th:each="cssPath,status:${#strings.setSplit(cssPaths,',')}" th:href="@{${cssPath}}"/>
 </head>
-<body>
-    <header >
-
-    </header>
-</body>
 </html>

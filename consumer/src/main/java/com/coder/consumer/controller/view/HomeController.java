@@ -23,7 +23,7 @@ import static com.coder.util.MD5Encrypt.MD5Encode;
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @Controller
 @RequestMapping
-
+@RefreshScope
 public class HomeController {
 
     @Value("${version}")

@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableEurekaClient
 @SpringBootApplication
-@RefreshScope
+
 public class ProviderApplication {
 
     public static void main(String[] args) {

@@ -18,7 +18,6 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @EnableFeignClients
 @EnableRedisHttpSession
 @EnableCaching
-@RefreshScope
 public class ConsumerApplication {
     public static void main(String[] args) {
         SpringApplication.run(ConsumerApplication.class,args);

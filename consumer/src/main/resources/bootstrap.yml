@@ -31,8 +31,8 @@ eureka:
 feign:
   hystrix:
     enabled: true
-#management:
-#  endpoints:
-#    web:
-#      exposure:
-#        include: bus-refresh
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh

@@ -22,3 +22,8 @@ eureka:
     prefer-ip-address: true
     # 在eureka server中看到的status显示为具体的ip地址和port
     instance-id: ${spring.application.name}:${spring.cloud.client.hostname}:${server.port}
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: bus-refresh

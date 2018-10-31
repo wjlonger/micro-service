@@ -19,3 +19,8 @@ spring:
   profiles:
     # 配置使用本地储存
     active: native
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh

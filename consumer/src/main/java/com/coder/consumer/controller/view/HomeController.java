@@ -7,6 +7,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,7 @@ import static com.coder.util.MD5Encrypt.MD5Encode;
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @Controller
 @RequestMapping
+
 public class HomeController {
 
     @Value("${version}")
@@ -32,7 +34,7 @@ public class HomeController {
 
     @GetMapping("/version")
     @ResponseBody
-    public String path(){
+    public String version(){
         return version;
     }
 

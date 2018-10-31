@@ -79,6 +79,12 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
+        <!-- 通过spring-rabbit来支持AMQP协议（Advanced Message Queuing Protocol. 。 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
 
         <!-- 这是Spring Boot的核心启动器，包含了自动配置、日志和YAML。 -->
         <!--<dependency>-->
@@ -86,11 +92,7 @@
             <!--<artifactId>spring-boot-starter</artifactId>-->
         <!--</dependency>-->
 
-        <!-- 通过spring-rabbit来支持AMQP协议（Advanced Message Queuing Protocol. 。 -->
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.boot</groupId>-->
-        <!--<artifactId>spring-boot-starter-amqp</artifactId>-->
-        <!--</dependency>-->
+
 
         <!-- 支持javax.mail模块。 -->
         <!--<dependency>-->

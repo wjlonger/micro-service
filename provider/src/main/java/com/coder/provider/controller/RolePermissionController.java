@@ -1,7 +1,6 @@
 package com.coder.provider.controller;
 
 import com.coder.base.service.RolePermissionService;
-import com.coder.provider.mapper.RolePermissionMapper;
 import com.coder.base.model.RolePermission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;

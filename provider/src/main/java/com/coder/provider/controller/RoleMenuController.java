@@ -1,7 +1,6 @@
 package com.coder.provider.controller;
 
 import com.coder.base.service.RoleMenuService;
-import com.coder.provider.mapper.RoleMenuMapper;
 import com.coder.base.model.RoleMenu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;

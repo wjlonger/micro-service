@@ -1,7 +1,6 @@
 package com.coder.provider.controller;
 
 import com.coder.base.service.DoubleColorBallService;
-import com.coder.provider.mapper.DoubleColorBallMapper;
 import com.coder.base.model.DoubleColorBall;
 import com.coder.util.CollectionUtils;
 import com.github.pagehelper.PageInfo;

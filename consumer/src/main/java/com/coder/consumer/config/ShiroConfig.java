@@ -19,9 +19,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import javax.servlet.Filter;
@@ -32,7 +34,7 @@ import java.util.Map;
  * @author WJL
  */
 @Configuration
-@RefreshScope
+//@RefreshScope
 public class ShiroConfig {
 
     public ShiroConfig(){
@@ -48,6 +50,16 @@ public class ShiroConfig {
     private String password;
 
     private Logger logger = LoggerFactory.getLogger(ShiroConfig.class);
+
+    @Bean
+    public FilterRegistrationBean delegatingFilterProxy(){
+        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+        DelegatingFilterProxy proxy = new DelegatingFilterProxy();
+        proxy.setTargetFilterLifecycle(true);
+        proxy.setTargetBeanName("shiroFilter");
+        filterRegistrationBean.setFilter(proxy);
+        return filterRegistrationBean;
+    }
 
     @Bean(name="shiroFilter")
     public ShiroFilterFactoryBean shirFilter(

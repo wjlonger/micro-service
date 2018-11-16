@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class Current {
 
-    public static String siessionId(){
+    public static String sessionId(){
         return SecurityUtils.getSubject().getSession().getId().toString();
     }
 

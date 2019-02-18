@@ -4,7 +4,7 @@
  * Version: 2.2.1
  * Home: https://github.com/jakerella/jquery-mockjax
  * Copyright (c) 2017 Jordan Kasper, formerly appendTo;
- * NOTE: This repository was taken over by Jordan Kasper (@jakerella) October, 2014
+ * NOTE: This elasticsearch was taken over by Jordan Kasper (@jakerella) October, 2014
  * 
  * Dual licensed under the MIT or GPL licenses.
  * http://opensource.org/licenses/MIT OR http://www.gnu.org/licenses/gpl-2.0.html
@@ -890,7 +890,7 @@
 	 * Create a new mock Ajax handler. When a mock handler is matched during a
 	 * $.ajax() call this library will intercept that request and fake a response
 	 * using the data and methods in the mock. You can see all settings in the
-	 * README of the main repository:
+	 * README of the main elasticsearch:
 	 * https://github.com/jakerella/jquery-mockjax#api-methods
 	 *
 	 * @param  {Object} settings The mock handelr settings: https://github.com/jakerella/jquery-mockjax#api-methods

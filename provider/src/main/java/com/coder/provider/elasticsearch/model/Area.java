@@ -3,6 +3,7 @@ package com.coder.provider.elasticsearch.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.data.elasticsearch.annotations.GeoPointField;
 
 import java.io.Serializable;
@@ -12,10 +13,12 @@ import java.io.Serializable;
  * Spring Data通过注解来声明字段的映射属性，有下面的三个注解：
  *
  * @Document 作用在类，标记实体类为文档对象，一般有两个属性
- * indexName：对应索引库名称
- * type：对应在索引库中的类型
+ * indexName：索引库的名称，个人建议以项目的名称命名
+ * type：类型，个人建议以实体的名称命名
  * shards：分片数量，默认5
  * replicas：副本数量，默认1
+ * indexStoreType 索引文件存储类型
+ * refreshInterval 刷新间隔
  * @Id 作用在成员变量，标记一个字段作为id主键
  * @Field 作用在成员变量，标记为文档的字段，并指定字段映射属性：
  * type：字段类型，是枚举：FieldType，可以是text、long、short、date、integer、object等
@@ -30,31 +33,60 @@ import java.io.Serializable;
  * index：是否索引，布尔类型，默认是true
  * store：是否存储，布尔类型，默认是false
  * analyzer：分词器名称，这里的ik_max_word即使用ik分词器
- * ---------------------
- * 作者：我要取一个响亮的昵称
- * 来源：CSDN
- * 原文：https://blog.csdn.net/chen_2890/article/details/83895646
- * 版权声明：本文为博主原创文章，转载请附上博文链接！
  */
-@Document(indexName="elasticsearch",type="area",indexStoreType="fs",shards=5,replicas=1,refreshInterval="-1")
+@Document(indexName="elasticsearch",
+        type="area",
+        indexStoreType="fs",
+        shards=5,
+        replicas=1,
+        refreshInterval="-1")
 public class Area implements Serializable {
 
-    private static final long serialVersionUID = -1L;
+    private static final long serialVersionUID = 8660904769375986160L;
 
     @Id
     private Long id;
+
     private Long pid;//父id
+
+    /**
+     * FieldType type() default FieldType.Auto;#自动检测属性的类型
+     *
+     * 	FieldIndex index() default FieldIndex.analyzed;#默认情况下分词
+     *
+     * 	DateFormat format() default DateFormat.none;
+     *
+     * 	String pattern() default "";
+     *
+     * 	boolean store() default false;#默认情况下不存储原文
+     *
+     * 	String searchAnalyzer() default "";#指定字段搜索时使用的分词器
+     *
+     * 	String indexAnalyzer() default "";#指定字段建立索引时指定的分词器
+     *
+     * 	String[] ignoreFields() default {};#如果某个字段需要被忽略
+     *
+     * 	boolean includeInParent() default false;
+     */
     @Field(analyzer="ik",searchAnalyzer="ik")
     private String  shortname;//简称
+
     @Field(analyzer="ik",searchAnalyzer="ik")
     private String  name;//名称
+
     @Field(analyzer="ik",searchAnalyzer="ik")
     private String  mergerName;//全称
+
     private Short   level; //层级 0 1 2 省市区县
+
     private String  pinyin;//拼音
+
     private String  code; //长途区号
+
     private String  zipCode; //邮编
+
     private String  first; //首字母
+
     @GeoPointField
     private String  location;//经纬度
 

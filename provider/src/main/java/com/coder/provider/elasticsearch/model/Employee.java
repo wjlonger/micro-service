@@ -4,8 +4,18 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 
-@Document(indexName = "megacorp",type = "employee", shards = 1,replicas = 0, refreshInterval = "-1")
-public class Employee {
+import java.io.Serializable;
+
+@Document(indexName="elasticsearch",
+        type="employee",
+        indexStoreType="fs",
+        shards=5,
+        replicas=1,
+        refreshInterval="-1")
+public class Employee implements Serializable {
+
+    private static final long serialVersionUID = 5867459092513695537L;
+
     @Id
     private String id;
     @Field

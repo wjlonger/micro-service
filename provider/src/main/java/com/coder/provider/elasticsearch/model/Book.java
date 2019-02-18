@@ -2,17 +2,33 @@ package com.coder.provider.elasticsearch.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
 
-@Document(indexName = "el",type = "book") //indexName 索引  type 类型
-public class Book {
-    
+import java.io.Serializable;
+
+@Document(indexName="elasticsearch",
+        type="book",
+        indexStoreType="fs",
+        shards=5,
+        replicas=1,
+        refreshInterval="-1")
+public class Book implements Serializable {
+
+    private static final long serialVersionUID = 1910349036378083664L;
+
     @Id
     private  Integer id;
+
+    @Field(analyzer = "ik", searchAnalyzer = "ik")
     private  String bookName;
+
+    @Field(analyzer = "ik", searchAnalyzer = "ik")
     private  String author;
+
     public Integer getId() {
         return id;
     }
+
     @Override
     public String toString() {
         return "Book{" +

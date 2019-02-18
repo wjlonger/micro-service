@@ -6,15 +6,22 @@ import org.springframework.data.elasticsearch.annotations.Field;
 
 import java.io.Serializable;
 
-@Document(indexName="elasticsearch",type="area",indexStoreType="fs",shards=5,replicas=1,refreshInterval="-1")
+@Document(indexName="elasticsearch",
+        type="goodsinfo",
+        indexStoreType="fs",
+        shards=5,
+        replicas=1,
+        refreshInterval="-1")
 public class GoodsInfo implements Serializable {
 
-    private static final long serialVersionUID = -1L;
+    private static final long serialVersionUID = -1678610371018406737L;
 
     @Id
     private Long id;
+
     @Field(analyzer="ik",searchAnalyzer="ik")
     private String name;
+
     @Field(analyzer="ik",searchAnalyzer="ik")
     private String description;
 

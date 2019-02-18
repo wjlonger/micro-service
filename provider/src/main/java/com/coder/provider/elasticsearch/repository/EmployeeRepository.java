@@ -7,5 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface EmployeeRepository extends ElasticsearchRepository<Employee,String> {
-    Employee queryEmployeeById(String id);
+
+    Employee queryById(String id);
+
+    Employee queryByFirstName(String firstName);
 }

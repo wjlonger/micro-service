@@ -20,4 +20,13 @@
       <module name="config-client" target="1.8" />
     </bytecodeTargetLevel>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="center" options="-parameters" />
+      <module name="config-server" options="-parameters" />
+      <module name="consumer" options="-parameters" />
+      <module name="provider" options="-parameters" />
+      <module name="route" options="-parameters" />
+    </option>
+  </component>
 </project>

@@ -79,11 +79,9 @@
             <version>4.0.0</version>
         </dependency>
 
-        <!-- 目前已知在京东JOS SDK上使用 -->
         <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-mapper-asl</artifactId>
-            <version>1.9.13</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
 
     </dependencies>

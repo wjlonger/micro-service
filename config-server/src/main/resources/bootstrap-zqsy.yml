@@ -1,0 +1,21 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8888/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.hostname}:${server.port}
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        native:
+          # 搜索 config下文件
+          searchLocations: classpath:/config
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

@@ -42,7 +42,7 @@
                 </li>
                 <li><i class="fa fa-phone"></i> <a th:href="@{'tel: 18633540415'}">18633540415</a></li>
                 <li class="website"><i class="fa fa-globe"></i>
-                    <a th:href="@{'http://wujunlong.com:10439'}" th:target="_blank">wujunlong.com</a>
+                    <a th:href="@{'http://wujunlong.com'}" th:target="_blank">wujunlong.com</a>
                 </li>
             </ul>
         </div>
@@ -55,7 +55,7 @@
                     <li><a class="scrollto" th:href="@{'#eudcation-section'}" href="#eudcation-section">教育经历</a></li>
                     <li><a class="scrollto" th:href="@{'#skills-section'}" href="#skills-section">技术栈</a></li>
                     <li><a class="scrollto" th:href="@{'#portfolio-section'}" href="#portfolio-section">项目经历</a></li>
-                    <li><a class="scrollto" th:href="@{'#testimonials-section'}" href="#testimonials-section">线上项目</a></li>
+                    <!--<li><a class="scrollto" th:href="@{'#testimonials-section'}" href="#testimonials-section">线上项目</a></li>-->
                     <li><a class="scrollto" th:href="@{'#contact-section'}" href="#contact-section">联系我</a></li>
                 </ul>
             </div>
@@ -85,26 +85,12 @@
             </div>
             <div class="item">
                 <div class="work-place">
-                    <h3 class="place">秦皇岛中仕科技开发有限公司</h3>
-                    <div class="location"><i class="fa fa-map-marker" aria-hidden="true"></i>秦皇岛</div>
-                </div>
-                <div class="job-meta">
-                    <div class="title">Java讲师</div>
-                    <div class="time">2017.6 - 2017.8</div>
-                </div><!--//job-meta-->
-                <div class="job-desc">
-                    <p>担任Java讲师，讲授Java初级课程。</p>
-                </div>
-            </div>
-
-            <div class="item">
-                <div class="work-place">
                     <h3 class="place">河北云酷科技有限公司</h3>
                     <div class="location"><i class="fa fa-map-marker" aria-hidden="true"></i>秦皇岛</div>
                 </div>
                 <div class="job-meta">
                     <div class="title">Java攻城狮</div>
-                    <div class="time">2016.6 - 2017.6</div>
+                    <div class="time">2016.6 - 2017.8</div>
                 </div>
                 <div class="job-desc">
                     <p>担任Java研发攻城狮，主要为电厂提供技术支持。</p>
@@ -239,35 +225,29 @@
             </div>
         </div>
     </section>
-    <section id="testimonials-section" class="testimonials-section section">
-        <h2 class="section-title">线上项目</h2>
-        <div id="testimonials-carousel" class="testimonials-carousel carousel slide" data-interval="400">
-            <ol class="carousel-indicators">
-                <li data-target="#testimonials-carousel" data-slide-to="0" class="active"></li>
-                <li data-target="#testimonials-carousel" data-slide-to="1"></li>
-                <li data-target="#testimonials-carousel" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner row text-center ">
-                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><i class="fa fa-quote-left text-center"></i></div>
-                <div class="item col-lg-10 col-md-10 col-sm-10 col-xs-10 active">
-                    <blockquote class="quote">
-                    <p><a th:href="${'/druid/index.html'}" th:target="_blank" >SpringBoot + Druid 数据源监控</a></p>
-                    </blockquote>
-                </div>
-                <div class="item col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                    <blockquote class="quote">
-                        <p><a th:href="${'/swagger-ui.html'}" th:target="_blank">SpringBoot +Swagger2 Restful Api</a></p>
-                    </blockquote>
-                </div>
-                <div class="item col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                    <blockquote class="quote">
-                        <p><a th:href="@{'http://dubbo.wujunlong.com:10335'}" th:target="_blank" >SpringBoot + Dubbo + Zookeeper 分布式监控</a></p>
-                    </blockquote>
-                </div>
-                <div><i class="fa fa-quote-right text-center"></i></div>
-            </div>
-        </div>
-    </section>
+<!--    <section id="testimonials-section" class="testimonials-section section">-->
+<!--        <h2 class="section-title">线上项目</h2>-->
+<!--        <div id="testimonials-carousel" class="testimonials-carousel carousel slide" data-interval="400">-->
+<!--            <ol class="carousel-indicators">-->
+<!--                <li data-target="#testimonials-carousel" data-slide-to="0" class="active"></li>-->
+<!--                <li data-target="#testimonials-carousel" data-slide-to="1"></li>-->
+<!--            </ol>-->
+<!--            <div class="carousel-inner row text-center ">-->
+<!--                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><i class="fa fa-quote-left text-center"></i></div>-->
+<!--                <div class="item col-lg-10 col-md-10 col-sm-10 col-xs-10 active">-->
+<!--                    <blockquote class="quote">-->
+<!--                    <p><a th:href="${'/druid/index.html'}" th:target="_blank" >SpringBoot + Druid 数据源监控</a></p>-->
+<!--                    </blockquote>-->
+<!--                </div>-->
+<!--                <div class="item col-lg-10 col-md-10 col-sm-10 col-xs-10">-->
+<!--                    <blockquote class="quote">-->
+<!--                        <p><a th:href="${'/swagger-ui.html'}" th:target="_blank">SpringBoot +Swagger2 Restful Api</a></p>-->
+<!--                    </blockquote>-->
+<!--                </div>-->
+<!--                <div><i class="fa fa-quote-right text-center"></i></div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
     <section id="contact-section" class="contact-section section">
         <h2 class="section-title">我能为你做什么</h2>
         <div class="intro">
